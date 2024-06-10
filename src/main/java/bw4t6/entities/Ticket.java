@@ -1,6 +1,5 @@
 package bw4t6.entities;
 
-
 import bw4t6.entities.abstracts.DocumentOfTravel;
 import jakarta.persistence.*;
 
@@ -12,15 +11,19 @@ import java.util.UUID;
 @DiscriminatorValue("tickets")
 public class Ticket extends DocumentOfTravel {
 
-
     @Id
     @GeneratedValue
     private UUID id;
 
     @ManyToMany
-    @JoinTable (name = "tickets_trips", joinColumns = @JoinColumn(name = "ticket_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "trip_id", nullable = false))
+    @JoinTable(
+            name = "tickets_trips",
+            joinColumns = @JoinColumn(name = "ticket_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "trip_id", nullable = false)
+    )
     private List<Trip> trips;
-    private Boolean state;//checked unchecked
+
+    private Boolean state;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -30,9 +33,9 @@ public class Ticket extends DocumentOfTravel {
     @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle_ticket;
 
-    public Ticket () {}
+    public Ticket() {}
 
-    public Ticket(LocalDate emission_date, String emission_point, double price, Boolean state, User user,Vehicle vehicle ) { // price da modificare
+    public Ticket(LocalDate emission_date, String emission_point, double price, Boolean state, User user, Vehicle vehicle) {
         super(emission_date, emission_point, price);
         this.state = state;
         this.user = user;
@@ -75,7 +78,6 @@ public class Ticket extends DocumentOfTravel {
         return id;
     }
 
-
     @Override
     public String toString() {
         return "Ticket{" +
@@ -84,7 +86,6 @@ public class Ticket extends DocumentOfTravel {
                 ", state=" + state +
                 ", user=" + user +
                 ", vehicle=" + vehicle_ticket +
-                ", id=" + id +
                 ", emission_date=" + emission_date +
                 ", emission_point='" + emission_point + '\'' +
                 ", price=" + price +

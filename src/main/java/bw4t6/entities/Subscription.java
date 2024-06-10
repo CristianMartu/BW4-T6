@@ -15,20 +15,21 @@ public class Subscription extends DocumentOfTravel {
     @Id
     @GeneratedValue
     private UUID id;
+
     @Enumerated(EnumType.STRING)
     private SubscriptionState state;
     @ManyToOne
     @JoinColumn(name = "card_id", nullable = false)
-    private User user;
+    private Card card;
     private LocalDate expired_date;
 
     public Subscription() {
     }
 
-    public Subscription(LocalDate emission_date, String emission_point, double price, SubscriptionState state, User user, LocalDate expired_date) {
+    public Subscription(LocalDate emission_date, String emission_point, double price, SubscriptionState state, Card card, LocalDate expired_date) {
         super(emission_date, emission_point, price);
         this.state = state;
-        this.user = user;
+        this.card = card;
         this.expired_date = expired_date;
     }
 
@@ -44,12 +45,12 @@ public class Subscription extends DocumentOfTravel {
         this.state = state;
     }
 
-    public User getUser() {
-        return user;
+    public Card getCard() {
+        return card;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCard(Card card) {
+        this.card = card;
     }
 
     public LocalDate getExpired_date() {
@@ -65,9 +66,8 @@ public class Subscription extends DocumentOfTravel {
         return "Subscription{" +
                 "id=" + id +
                 ", state=" + state +
-                ", user=" + user +
+                ", card=" + card +
                 ", expired_date=" + expired_date +
-                ", id=" + id +
                 ", emission_date=" + emission_date +
                 ", emission_point='" + emission_point + '\'' +
                 ", price=" + price +

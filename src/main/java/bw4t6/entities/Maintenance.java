@@ -12,9 +12,11 @@ public class Maintenance {
 
     @Id
     @GeneratedValue
+    private UUID id;
+
     @ManyToOne
     @JoinColumn(name = "vehicle_id", nullable = false)
-    private UUID vehicle_maintenance;
+    private Vehicle vehicle_maintenance;
 
     private LocalDate maintenance_start;
     private LocalDate maintenance_end;
@@ -26,8 +28,16 @@ public class Maintenance {
         this.maintenance_end = maintenance_end;
     }
 
-    public UUID getVehicle_maintenance() {
+    public UUID getId() {
+        return id;
+    }
+
+    public Vehicle getVehicle_maintenance() {
         return vehicle_maintenance;
+    }
+
+    public void setVehicle_maintenance(Vehicle vehicle_maintenance) {
+        this.vehicle_maintenance = vehicle_maintenance;
     }
 
     public LocalDate getMaintenance_start() {
@@ -49,7 +59,8 @@ public class Maintenance {
     @Override
     public String toString() {
         return "Maintenance{" +
-                "vehicle_maintenance=" + vehicle_maintenance +
+                "id=" + id +
+                ", vehicle_maintenance=" + vehicle_maintenance +
                 ", maintenance_start=" + maintenance_start +
                 ", maintenance_end=" + maintenance_end +
                 '}';

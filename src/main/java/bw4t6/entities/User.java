@@ -16,7 +16,7 @@ public class User {
     private UUID card_id;
 
     @OneToMany(mappedBy = "user")
-    private List<User> users;
+    private List<Card> cards;
 
     private String name;
     private String surname;
@@ -37,12 +37,12 @@ public class User {
         return card_id;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<Card> getCards() {
+        return cards;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 
     public String getName() {
@@ -73,7 +73,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "card_id=" + card_id +
-                ", users=" + users +
+                ", cards=" + cards +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", birthdate=" + birthdate +

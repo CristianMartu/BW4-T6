@@ -15,7 +15,7 @@ public class Card {
     private User user;
 
 
-    @OneToMany(mappedBy = "user")  //da cambiare poi
+    @OneToMany(mappedBy = "card")
     private List<Subscription> subscriptionList;
     private LocalDate expired_date;
 
