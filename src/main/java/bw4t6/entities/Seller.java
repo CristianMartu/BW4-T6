@@ -1,13 +1,16 @@
 package bw4t6.entities;
 
 
+import bw4t6.entities.abstracts.DocumentOfTravel;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "sellers")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "type_of_sellers")
 public class Seller {
 
     @Id
@@ -17,12 +20,16 @@ public class Seller {
     private String company_name;
     private String emission_point;
 
+    @OneToMany(mappedBy = "seller")
+    private List<DocumentOfTravel> documentOfTravels;
+
 
     public Seller() {}
 
-    public Seller(String emission_point, String company_name) {
-        this.emission_point = emission_point;
+    public Seller(String company_name, String emission_point) {
         this.company_name = company_name;
+        this.emission_point = emission_point;
+
     }
 
     public UUID getSeller_id() {

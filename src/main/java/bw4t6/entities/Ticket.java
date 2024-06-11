@@ -11,9 +11,6 @@ import java.util.UUID;
 @DiscriminatorValue("tickets")
 public class Ticket extends DocumentOfTravel {
 
-    @Id
-    @GeneratedValue
-    private UUID id;
 
     @ManyToMany
     @JoinTable(
@@ -35,11 +32,11 @@ public class Ticket extends DocumentOfTravel {
 
     public Ticket() {}
 
-    public Ticket(LocalDate emission_date, String emission_point, double price, Boolean state, User user, Vehicle vehicle) {
-        super(emission_date, emission_point, price);
+    public Ticket(LocalDate emission_date, String emission_point, double price, Seller seller, Boolean state, User user, Vehicle vehicle_ticket) {
+        super(emission_date, emission_point, price, seller);
         this.state = state;
         this.user = user;
-        this.vehicle_ticket = vehicle;
+        this.vehicle_ticket = vehicle_ticket;
     }
 
     public List<Trip> getTrips() {
@@ -74,14 +71,9 @@ public class Ticket extends DocumentOfTravel {
         this.vehicle_ticket = vehicle;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
     @Override
     public String toString() {
         return "Ticket{" +
-                "id=" + id +
                 ", trips=" + trips +
                 ", state=" + state +
                 ", user=" + user +
