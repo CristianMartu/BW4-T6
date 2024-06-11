@@ -12,9 +12,6 @@ import java.util.UUID;
 @DiscriminatorValue("subscriptions")
 public class Subscription extends DocumentOfTravel {
 
-    @Id
-    @GeneratedValue
-    private UUID id;
 
     @Enumerated(EnumType.STRING)
     private SubscriptionState state;
@@ -26,16 +23,13 @@ public class Subscription extends DocumentOfTravel {
     public Subscription() {
     }
 
-    public Subscription(LocalDate emission_date, String emission_point, double price, SubscriptionState state, Card card, LocalDate expired_date) {
-        super(emission_date, emission_point, price);
+    public Subscription(LocalDate emission_date, String emission_point, double price, Seller seller, SubscriptionState state, Card card, LocalDate expired_date) {
+        super(emission_date, emission_point, price, seller);
         this.state = state;
         this.card = card;
         this.expired_date = expired_date;
     }
 
-    public UUID getId() {
-        return id;
-    }
 
     public SubscriptionState getState() {
         return state;
@@ -64,7 +58,6 @@ public class Subscription extends DocumentOfTravel {
     @Override
     public String toString() {
         return "Subscription{" +
-                "id=" + id +
                 ", state=" + state +
                 ", card=" + card +
                 ", expired_date=" + expired_date +

@@ -20,17 +20,17 @@ public class User {
 
     private String name;
     private String surname;
-    private LocalDate birthdate;
+    private LocalDate date_of_birth;
 
 
 
 
     public User() {}
 
-    public User( String name, String surname, LocalDate birthdate) {
+    public User( String name, String surname, LocalDate date_of_birth) {
         this.name = name;
         this.surname = surname;
-        this.birthdate = birthdate;
+        this.date_of_birth = date_of_birth;
     }
 
     public UUID getCard_id() {
@@ -61,12 +61,12 @@ public class User {
         this.surname = surname;
     }
 
-    public LocalDate getBirthdate() {
-        return birthdate;
+    public LocalDate getBirthday() {
+        return date_of_birth;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthday(LocalDate date_of_birth) {
+        this.date_of_birth = date_of_birth;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class User {
                 ", cards=" + cards +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", birthdate=" + birthdate +
+                ", date_of_birth=" + date_of_birth +
                 '}';
     }
 }
