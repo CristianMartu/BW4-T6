@@ -1,7 +1,6 @@
 package bw4t6.entities.abstracts;
 
 import bw4t6.entities.Seller;
-import bw4t6.entities.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -12,17 +11,19 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.JOINED)
 
 public abstract class DocumentOfTravel {
-
     @Id
     @GeneratedValue
-    protected UUID documet_id;
+    protected UUID document_id;
     protected LocalDate emission_date;
     protected String emission_point;
     protected double price;
-@ManyToOne
-@JoinColumn(name = "emission_points", nullable = false)
-private Seller seller;
-    public DocumentOfTravel() {}
+
+    @ManyToOne
+    @JoinColumn(name = "emission_points", nullable = false)
+    private Seller seller;
+
+    public DocumentOfTravel() {
+    }
 
     public DocumentOfTravel(LocalDate emission_date, String emission_point, double price, Seller seller) {
         this.emission_date = emission_date;
@@ -31,8 +32,7 @@ private Seller seller;
         this.seller = seller;
     }
 
-    public UUID getDocumet_id() {
-        return documet_id;
+    public UUID getDocument_id() {
+        return document_id;
     }
-
 }
