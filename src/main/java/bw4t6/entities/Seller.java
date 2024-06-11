@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "sellers")
+@Inheritance(strategy = InheritanceType.JOINED)
+
 public class Seller {
 
     @Id

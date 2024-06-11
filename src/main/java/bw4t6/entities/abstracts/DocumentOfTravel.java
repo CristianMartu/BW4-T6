@@ -8,13 +8,14 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "documents_of_travel")
+@Inheritance(strategy = InheritanceType.JOINED)
+
 public abstract class DocumentOfTravel {
 
     @Id
     @GeneratedValue
-    protected UUID id;
+    protected UUID documet_id;
     protected LocalDate emission_date;
     protected String emission_point;
     protected double price;
@@ -23,24 +24,15 @@ public abstract class DocumentOfTravel {
 private Seller seller;
     public DocumentOfTravel() {}
 
-    public DocumentOfTravel(LocalDate emission_date, String emission_point, double price) {
+    public DocumentOfTravel(LocalDate emission_date, String emission_point, double price, Seller seller) {
         this.emission_date = emission_date;
         this.emission_point = emission_point;
         this.price = price;
-    }
-
-    public Seller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(Seller seller) {
         this.seller = seller;
     }
 
-    @Override
-    public String toString() {
-        return "DocumentOfTravel{" +
-                "seller=" + seller +
-                '}';
+    public UUID getDocumet_id() {
+        return documet_id;
     }
+
 }
