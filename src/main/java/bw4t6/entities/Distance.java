@@ -30,8 +30,8 @@ public class Distance {
 
    }
 
-    public Distance(int number_of_trip, double time_of_travel, Vehicle vehicle_distance) {
-        this.number_of_trip = number_of_trip;
+    public Distance(Double time_of_travel,Vehicle vehicle_distance) {
+        this.number_of_trip = 0;
         this.time_of_travel = time_of_travel;
         this.vehicle_distance = vehicle_distance;
     }

@@ -19,6 +19,8 @@ public class TripDAO {
         em.persist(trip);
         tx.commit();
         System.out.println(trip + " salvato");
+        DistanceDAO  distanceDAO = new DistanceDAO(em);
+        distanceDAO.update(trip.getDistance_trip().getDistance_id());
     }
 
     public Trip findById(String id) {

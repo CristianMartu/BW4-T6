@@ -4,11 +4,14 @@ package bw4t6.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "trips")
 public class Trip {
     @Id
+    @GeneratedValue
+    private UUID trip_id;
     @ManyToOne
     @JoinColumn(name = "distance_id",nullable = false)
     private Distance distance_trip;
@@ -24,6 +27,10 @@ public class Trip {
         this.average_time = average_time;
         this.finish_zone = finish_zone;
         this.starting_zone = starting_zone;
+    }
+
+    public UUID getTrip_id() {
+        return trip_id;
     }
 
     public Distance getDistance_trip() {
@@ -57,7 +64,8 @@ public class Trip {
     @Override
     public String toString() {
         return "Trip{" +
-                "distance_trip=" + distance_trip +
+                "trip_id=" + trip_id +
+                ", distance_trip=" + distance_trip +
                 ", average_time=" + average_time +
                 ", starting_zone='" + starting_zone + '\'' +
                 ", finish_zone='" + finish_zone + '\'' +

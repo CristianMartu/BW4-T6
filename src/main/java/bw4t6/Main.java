@@ -122,7 +122,7 @@ public class Main {
 
         Maintenance maintenenceAutobus = new Maintenance("davide ha rotto l'autobus (rotto le ruote)",autobus2,null,LocalDate.now().minusDays(18));
 
-        Distance percorrenza1 = new Distance(5,45,tram);
+        Distance percorrenza1 = new Distance(45.0,tram);
 
         Trip trip = new Trip(percorrenza1,60,"Latina","Roma");
         
@@ -150,16 +150,28 @@ public class Main {
 //
 //        docDAO.save(ticketAldoByCard);
 //        docDAO.save(ticketGiovanniByCard);
-
+//
 //        maintenanceDAO.save(maintenenceAutobus);
+//
+//        distanceDAO.save(percorrenza1);
+//        tripDAO.save(trip);
 
-        distanceDAO.save(percorrenza1);
-        tripDAO.save(trip);
+
 
         try {
             Subscription aldoFromDb = docDAO.findSubscriptionById("76e0851c-e432-4fb8-9d43-ba373e871cd6");
             Ticket ticketAldoByCard2 = new Ticket(LocalDate.now(), 2, roma, tram, aldoFromDb);
             docDAO.save(ticketAldoByCard2);
+        } catch (RuntimeException error) {
+            System.out.println(error.getMessage());
+        }
+
+        try {
+            for (int i = 0; i < 5; i++) {
+                Distance percorrenza1FromDb = distanceDAO.findById("f08a20c0-2951-4408-ae24-928086484054");
+                Trip newRepTrip = new Trip(percorrenza1FromDb,60,"Latina","Roma");
+                tripDAO.save(newRepTrip);
+            }
         } catch (RuntimeException error) {
             System.out.println(error.getMessage());
         }
