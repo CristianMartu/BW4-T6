@@ -1,7 +1,10 @@
 package bw4t6.entities;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue
+    //@GeneratedValue  // da riattivare dopo
     private UUID card_id;
 
     @OneToMany(mappedBy = "user")
@@ -23,11 +26,17 @@ public class User {
     private LocalDate date_of_birth;
 
 
+    public User() {
+    }
 
+    public User(String name, String surname, LocalDate date_of_birth) {
+        this.name = name;
+        this.surname = surname;
+        this.date_of_birth = date_of_birth;
+    }
 
-    public User() {}
-
-    public User( String name, String surname, LocalDate date_of_birth) {
+    public User(String card_id, String name, String surname, LocalDate date_of_birth) {
+        this.card_id = UUID.fromString(card_id);
         this.name = name;
         this.surname = surname;
         this.date_of_birth = date_of_birth;

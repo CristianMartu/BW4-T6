@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @DiscriminatorValue("tickets")
@@ -30,10 +29,11 @@ public class Ticket extends DocumentOfTravel {
     @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle_ticket;
 
-    public Ticket() {}
+    public Ticket() {
+    }
 
-    public Ticket(LocalDate emission_date, String emission_point, double price, Seller seller, Boolean state, User user, Vehicle vehicle_ticket) {
-        super(emission_date, emission_point, price, seller);
+    public Ticket(LocalDate emission_date, double price, Seller seller, Boolean state, User user, Vehicle vehicle_ticket) {
+        super(emission_date, price, seller);
         this.state = state;
         this.user = user;
         this.vehicle_ticket = vehicle_ticket;
@@ -74,12 +74,12 @@ public class Ticket extends DocumentOfTravel {
     @Override
     public String toString() {
         return "Ticket{" +
-                ", trips=" + trips +
+                "trips=" + trips +
                 ", state=" + state +
                 ", user=" + user +
-                ", vehicle=" + vehicle_ticket +
+                ", vehicle_ticket=" + vehicle_ticket +
+                ", document_id=" + document_id +
                 ", emission_date=" + emission_date +
-                ", emission_point='" + emission_point + '\'' +
                 ", price=" + price +
                 '}';
     }

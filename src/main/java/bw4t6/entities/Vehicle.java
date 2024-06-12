@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Vehicle {
 
     @Id
-    @GeneratedValue
+    // @GeneratedValue // da riattivare dopo
     private UUID vehicle_id;
 
     private int capacity;
@@ -28,9 +28,17 @@ public class Vehicle {
     @Enumerated(EnumType.STRING)
     private VehicleType vehicle_type;
 
-    public Vehicle () {}
+    public Vehicle() {
+    }
 
     public Vehicle(int capacity, boolean state, VehicleType vehicle_type) {
+        this.capacity = capacity;
+        this.state = state;
+        this.vehicle_type = vehicle_type;
+    }
+
+    public Vehicle(String vehicle_id, int capacity, boolean state, VehicleType vehicle_type) {
+        this.vehicle_id = UUID.fromString(vehicle_id);
         this.capacity = capacity;
         this.state = state;
         this.vehicle_type = vehicle_type;

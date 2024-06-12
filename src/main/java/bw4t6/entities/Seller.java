@@ -10,23 +10,29 @@ import java.util.UUID;
 @Entity
 @Table(name = "sellers")
 @Inheritance(strategy = InheritanceType.JOINED)
-
 public class Seller {
 
     @Id
-    @GeneratedValue
+    //@GeneratedValue // da riattivare dopo
     private UUID seller_id;
 
     private String company_name;
     private String emission_point;
 
- @OneToMany(mappedBy = "seller")
-private List<DocumentOfTravel> documentOfTravels;
+    @OneToMany(mappedBy = "seller")
+    private List<DocumentOfTravel> documentOfTravels;
 
 
-    public Seller() {}
+    public Seller() {
+    }
 
     public Seller(String emission_point, String company_name) {
+        this.emission_point = emission_point;
+        this.company_name = company_name;
+    }
+
+    public Seller(String seller_id, String emission_point, String company_name) {
+        this.seller_id = UUID.fromString(seller_id);
         this.emission_point = emission_point;
         this.company_name = company_name;
     }

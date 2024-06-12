@@ -15,7 +15,6 @@ public abstract class DocumentOfTravel {
     @GeneratedValue
     protected UUID document_id;
     protected LocalDate emission_date;
-    protected String emission_point;
     protected double price;
 
     @ManyToOne
@@ -25,9 +24,8 @@ public abstract class DocumentOfTravel {
     public DocumentOfTravel() {
     }
 
-    public DocumentOfTravel(LocalDate emission_date, String emission_point, double price, Seller seller) {
+    public DocumentOfTravel(LocalDate emission_date, double price, Seller seller) {
         this.emission_date = emission_date;
-        this.emission_point = emission_point;
         this.price = price;
         this.seller = seller;
     }

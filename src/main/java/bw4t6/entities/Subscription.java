@@ -5,8 +5,6 @@ import bw4t6.enums.SubscriptionState;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Locale;
-import java.util.UUID;
 
 @Entity
 @DiscriminatorValue("subscriptions")
@@ -23,8 +21,8 @@ public class Subscription extends DocumentOfTravel {
     public Subscription() {
     }
 
-    public Subscription(LocalDate emission_date, String emission_point, double price, Seller seller, SubscriptionState state, Card card, LocalDate expired_date) {
-        super(emission_date, emission_point, price, seller);
+    public Subscription(LocalDate emission_date, double price, Seller seller, SubscriptionState state, Card card, LocalDate expired_date) {
+        super(emission_date, price, seller);
         this.state = state;
         this.card = card;
         this.expired_date = expired_date;
@@ -58,11 +56,11 @@ public class Subscription extends DocumentOfTravel {
     @Override
     public String toString() {
         return "Subscription{" +
-                ", state=" + state +
+                "state=" + state +
                 ", card=" + card +
                 ", expired_date=" + expired_date +
+                ", document_id=" + document_id +
                 ", emission_date=" + emission_date +
-                ", emission_point='" + emission_point + '\'' +
                 ", price=" + price +
                 '}';
     }
