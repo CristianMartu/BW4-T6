@@ -19,14 +19,14 @@ public class Vehicle {
     @OneToMany(mappedBy = "vehicle_maintenance")
     private List<Maintenance> vehicle_maintenances;
 
-    @OneToMany(mappedBy = "vehicle_trip")
-    private List<Trip> vehicle_trips;
-
     @OneToMany(mappedBy = "vehicle_ticket")
     private List<Ticket> vehicle_tickets;
 
     @Enumerated(EnumType.STRING)
     private VehicleType vehicle_type;
+
+    @OneToMany(mappedBy = "vehicle_distance")
+    private List<Distance> vehicle_distances;
 
     public Vehicle() {
     }
@@ -70,14 +70,6 @@ public class Vehicle {
 
     public void setVehicle_maintenances(List<Maintenance> vehicle_maintenances) {
         this.vehicle_maintenances = vehicle_maintenances;
-    }
-
-    public List<Trip> getVehicle_trips() {
-        return vehicle_trips;
-    }
-
-    public void setVehicle_trips(List<Trip> vehicle_trips) {
-        this.vehicle_trips = vehicle_trips;
     }
 
     public List<Ticket> getVehicle_tickets() {

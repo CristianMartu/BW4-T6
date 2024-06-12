@@ -64,12 +64,14 @@ public class Main {
         System.out.println("Hello World!");
         EntityManager em = emf.createEntityManager();
         CardDAO cardDAO = new CardDAO(em);
+        DistanceDAO distanceDAO = new DistanceDAO(em);
         DocumentOfTravelDAO docDAO = new DocumentOfTravelDAO(em);
         MaintenanceDAO maintenanceDAO = new MaintenanceDAO(em);
         SellerDAO sellerDAO = new SellerDAO(em);
         TripDAO tripDAO = new TripDAO(em);
         UserDAO userDAO = new UserDAO(em);
         VehicleDAO vehicleDAO = new VehicleDAO(em);
+
 
 /*        List<User> userList = createRandomList(10, "user");
         userList.forEach(userDAO::save);
@@ -117,31 +119,42 @@ public class Main {
 
         Ticket ticketAldoByCard = new Ticket(LocalDate.now(), 2, milano, autobus, subscriptionAldo);
         Ticket ticketGiovanniByCard = new Ticket(LocalDate.now().minusDays(1), 2, roma, autobus, subscriptionGiovanni);
+
+        Maintenance maintenenceAutobus = new Maintenance("davide ha rotto l'autobus (rotto le ruote)",autobus2,null,LocalDate.now().minusDays(18));
+
+        Distance percorrenza1 = new Distance(5,45,tram);
+
+        Trip trip = new Trip(percorrenza1,60,"Latina","Roma");
         
-        userDAO.save(giovanni);
-        userDAO.save(giacomo);
-        userDAO.save(aldo);
-        sellerDAO.save(milano);
-        sellerDAO.save(genova);
-        sellerDAO.save(cagliari);
-        sellerDAO.save(roma);
-        vehicleDAO.save(autobus);
-        vehicleDAO.save(autobus2);
-        vehicleDAO.save(tram);
-        vehicleDAO.save(tram2);
+//        userDAO.save(giovanni);
+//        userDAO.save(giacomo);
+//        userDAO.save(aldo);
+//        sellerDAO.save(milano);
+//        sellerDAO.save(genova);
+//        sellerDAO.save(cagliari);
+//        sellerDAO.save(roma);
+//        vehicleDAO.save(autobus);
+//        vehicleDAO.save(autobus2);
+//        vehicleDAO.save(tram);
+//        vehicleDAO.save(tram2);
+//
+//        docDAO.save(ticketGiacomo);
+//        docDAO.save(ticketAldo);
+//        docDAO.save(ticketGiovanni);
+//
+//        cardDAO.save(cardAldo);
+//        cardDAO.save(cardGiovanni);
+//
+//        docDAO.save(subscriptionAldo);
+//        docDAO.save(subscriptionGiovanni);
+//
+//        docDAO.save(ticketAldoByCard);
+//        docDAO.save(ticketGiovanniByCard);
 
-        docDAO.save(ticketGiacomo);
-        docDAO.save(ticketAldo);
-        docDAO.save(ticketGiovanni);
+//        maintenanceDAO.save(maintenenceAutobus);
 
-        cardDAO.save(cardAldo);
-        cardDAO.save(cardGiovanni);
-
-        docDAO.save(subscriptionAldo);
-        docDAO.save(subscriptionGiovanni);
-
-        docDAO.save(ticketAldoByCard);
-        docDAO.save(ticketGiovanniByCard);
+        distanceDAO.save(percorrenza1);
+        tripDAO.save(trip);
 
         try {
             Subscription aldoFromDb = docDAO.findSubscriptionById("76e0851c-e432-4fb8-9d43-ba373e871cd6");

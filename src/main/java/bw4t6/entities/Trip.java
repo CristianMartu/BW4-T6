@@ -10,9 +10,8 @@ import java.util.List;
 public class Trip {
     @Id
     @ManyToOne
-    @JoinColumn(name = "vehicle_id", nullable = false)
-    private Vehicle vehicle_trip;
-
+    @JoinColumn(name = "distance_id",nullable = false)
+    private Distance distance_trip;
 
     private double average_time;
     private String starting_zone;
@@ -20,11 +19,15 @@ public class Trip {
 
     public Trip() {}
 
-    public Trip(Vehicle vehicle,  double average_time, String starting_zone, String finish_zone) {
-        this.vehicle_trip = vehicle;
+    public Trip(Distance distance_trip, double average_time, String finish_zone, String starting_zone) {
+        this.distance_trip = distance_trip;
         this.average_time = average_time;
-        this.starting_zone = starting_zone;
         this.finish_zone = finish_zone;
+        this.starting_zone = starting_zone;
+    }
+
+    public Distance getDistance_trip() {
+        return distance_trip;
     }
 
     public double getAverage_time() {
@@ -33,14 +36,6 @@ public class Trip {
 
     public void setAverage_time(double average_time) {
         this.average_time = average_time;
-    }
-
-    public Vehicle getVehicle() {
-        return vehicle_trip;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle_trip = vehicle;
     }
 
     public String getStarting_zone() {
@@ -59,11 +54,10 @@ public class Trip {
         this.finish_zone = finish_zone;
     }
 
-
     @Override
     public String toString() {
         return "Trip{" +
-                "vehicle=" + vehicle_trip +
+                "distance_trip=" + distance_trip +
                 ", average_time=" + average_time +
                 ", starting_zone='" + starting_zone + '\'' +
                 ", finish_zone='" + finish_zone + '\'' +
