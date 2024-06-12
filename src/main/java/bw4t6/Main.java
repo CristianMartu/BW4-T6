@@ -105,9 +105,9 @@ public class Main {
         Vehicle autobus2 = new Vehicle("aeba9b8e-fc5e-43fd-910c-a8f739f0593d", 55, false, VehicleType.AUTOBUS);
         Vehicle tram2 = new Vehicle("fc885652-f181-4c0a-97cb-b24c9035fd41", 160, false, VehicleType.TRAM);
 
-        Ticket ticketAldo = new Ticket(LocalDate.of(2024, 9, 9), 1.5, milano, true, aldo, autobus);
-        Ticket ticketGiacomo = new Ticket(LocalDate.of(2024, 9, 9), 1.5, roma, true, giacomo, tram);
-        Ticket ticketGiovanni = new Ticket(LocalDate.of(2024, 9, 9), 1.5, cagliari, true, giovanni, autobus);
+        Ticket ticketAldo = new Ticket(LocalDate.now(), 1.5, milano, true, aldo, autobus);
+        Ticket ticketGiacomo = new Ticket(LocalDate.now().minusDays(5), 1.8, roma, true, giacomo, tram);
+        Ticket ticketGiovanni = new Ticket(LocalDate.now().minusMonths(1), 2, cagliari, true, giovanni, autobus);
 
         Card cardAldo = new Card(aldo, LocalDate.now().plusYears(1));
         Card cardGiovanni = new Card(giovanni, LocalDate.parse("2023-02-23"));
@@ -115,26 +115,29 @@ public class Main {
         Subscription subscriptionAldo = new Subscription(LocalDate.now(), 270, milano, SubscriptionState.WEEKLY, cardAldo);
         Subscription subscriptionGiovanni = new Subscription(LocalDate.parse("2024-01-19"), 270, milano, SubscriptionState.MONTHLY, cardAldo);
 
-        userDAO.save(giovanni);
-        userDAO.save(giacomo);
-        userDAO.save(aldo);
-        sellerDAO.save(milano);
-        sellerDAO.save(genova);
-        sellerDAO.save(cagliari);
-        sellerDAO.save(roma);
-        vehicleDAO.save(autobus);
-        vehicleDAO.save(autobus2);
-        vehicleDAO.save(tram);
-        vehicleDAO.save(tram2);
+        Ticket ticketAldoByCard = new Ticket(LocalDate.now(), 2, milano, null, aldo, autobus);
 
-        docDAO.save(ticketGiacomo);
-        docDAO.save(ticketAldo);
-        docDAO.save(ticketGiovanni);
-
-        cardDAO.save(cardAldo);
-        cardDAO.save(cardGiovanni);
-
-        docDAO.save(subscriptionAldo);
-        docDAO.save(subscriptionGiovanni);
+//        userDAO.save(giovanni);
+//        userDAO.save(giacomo);
+//        userDAO.save(aldo);
+//        sellerDAO.save(milano);
+//        sellerDAO.save(genova);
+//        sellerDAO.save(cagliari);
+//        sellerDAO.save(roma);
+//        vehicleDAO.save(autobus);
+//        vehicleDAO.save(autobus2);
+//        vehicleDAO.save(tram);
+//        vehicleDAO.save(tram2);
+//
+//        docDAO.save(ticketGiacomo);
+//        docDAO.save(ticketAldo);
+//        docDAO.save(ticketGiovanni);
+//
+//        cardDAO.save(cardAldo);
+//        cardDAO.save(cardGiovanni);
+//
+//        docDAO.save(subscriptionAldo);
+//        docDAO.save(subscriptionGiovanni);
+        docDAO.save(ticketAldoByCard);
     }
 }
