@@ -117,15 +117,16 @@ public class Main {
         Subscription subscriptionAldo = new Subscription(LocalDate.now(), 270, milano, SubscriptionState.WEEKLY, cardAldo);
         Subscription subscriptionGiovanni = new Subscription(LocalDate.parse("2024-01-19"), 270, milano, SubscriptionState.MONTHLY, cardGiovanni);
 
-        Ticket ticketAldoByCard = new Ticket(LocalDate.now(), 2, milano, autobus, subscriptionAldo);
-        Ticket ticketGiovanniByCard = new Ticket(LocalDate.now().minusDays(1), 2, roma, autobus, subscriptionGiovanni);
+        // Extra aggiungere controllo scadenza card per creazione ticket
+        Ticket ticketAldoByCard = new Ticket(LocalDate.now(), milano, autobus, subscriptionAldo, true);
+        Ticket ticketGiovanniByCard = new Ticket(LocalDate.now().minusDays(1), roma, autobus, subscriptionGiovanni, true);
 
-        Maintenance maintenenceAutobus = new Maintenance("davide ha rotto l'autobus (rotto le ruote)",autobus2,null,LocalDate.now().minusDays(18));
+        Maintenance maintenenceAutobus = new Maintenance("davide ha rotto l'autobus (rotto le ruote)", autobus2, null, LocalDate.now().minusDays(18));
 
-        Distance percorrenza1 = new Distance(45.0,tram);
+        Distance percorrenza1 = new Distance(45.0, tram);
 
-        Trip trip = new Trip(percorrenza1,60,"Latina","Roma");
-        
+        Trip trip = new Trip(percorrenza1, 60, "Latina", "Roma");
+
 //        userDAO.save(giovanni);
 //        userDAO.save(giacomo);
 //        userDAO.save(aldo);
@@ -157,10 +158,10 @@ public class Main {
 //        tripDAO.save(trip);
 
 
-
+        // aggiungere un biglietto tramite abbonamento
         try {
-            Subscription aldoFromDb = docDAO.findSubscriptionById("76e0851c-e432-4fb8-9d43-ba373e871cd6");
-            Ticket ticketAldoByCard2 = new Ticket(LocalDate.now(), 2, roma, tram, aldoFromDb);
+            Subscription aldoFromDb = docDAO.findSubscriptionById("1c81a5b1-7f54-4b53-a4c7-d91932477843");
+            Ticket ticketAldoByCard2 = new Ticket(LocalDate.now(), roma, tram, aldoFromDb, true);
             docDAO.save(ticketAldoByCard2);
         } catch (RuntimeException error) {
             System.out.println(error.getMessage());
@@ -168,12 +169,12 @@ public class Main {
 
         try {
             for (int i = 0; i < 5; i++) {
-                Distance percorrenza1FromDb = distanceDAO.findById("f08a20c0-2951-4408-ae24-928086484054");
-                Trip newRepTrip = new Trip(percorrenza1FromDb,60,"Latina","Roma");
+                Distance percorrenza1FromDb = distanceDAO.findById("7c3c320f-defb-46ca-8436-b016da952ba9");
+                Trip newRepTrip = new Trip(percorrenza1FromDb, 60, "Latina", "Roma");
                 tripDAO.save(newRepTrip);
             }
         } catch (RuntimeException error) {
             System.out.println(error.getMessage());
         }
-}
+    }
 }

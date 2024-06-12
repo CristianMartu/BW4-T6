@@ -30,6 +30,12 @@ public abstract class DocumentOfTravel {
         this.seller = seller;
     }
 
+    public DocumentOfTravel(LocalDate emission_date, Seller seller) {
+        this.emission_date = emission_date;
+        this.price = 0;
+        this.seller = seller;
+    }
+
     public UUID getDocument_id() {
         return document_id;
     }

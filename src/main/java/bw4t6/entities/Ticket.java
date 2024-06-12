@@ -1,10 +1,12 @@
 package bw4t6.entities;
 
 import bw4t6.entities.abstracts.DocumentOfTravel;
-import jakarta.persistence.*;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @DiscriminatorValue("tickets")
@@ -35,11 +37,11 @@ public class Ticket extends DocumentOfTravel {
         this.vehicle_ticket = vehicle_ticket;
     }
 
-    public Ticket(LocalDate emission_date, double price, Seller seller, Vehicle vehicle_ticket, Subscription subscription_ticket) {
-        super(emission_date, price, seller);
+    public Ticket(LocalDate emission_date, Seller seller, Vehicle vehicle_ticket, Subscription subscription_ticket, Boolean state) {
+        super(emission_date, seller);
         this.vehicle_ticket = vehicle_ticket;
         this.subscription_ticket = subscription_ticket;
-        this.setState();
+        this.state = state;
     }
 
     public Vehicle getVehicle_ticket() {
@@ -62,10 +64,8 @@ public class Ticket extends DocumentOfTravel {
         return state;
     }
 
-    public void setState() {
-        if (this.subscription_ticket.getExpired_date().compareTo(LocalDate.now()) > 0) { // da modificare, controllare anche orario e minuti
-            this.state = true;
-        } else this.state = false;
+    public void setState(Boolean state) {
+        this.state = state;
     }
 
     public User getUser() {
