@@ -22,11 +22,11 @@ public class Ticket extends DocumentOfTravel {
     private Boolean state;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "vehicle_id")
+    @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle_ticket;
 
     @ManyToOne
@@ -43,12 +43,11 @@ public class Ticket extends DocumentOfTravel {
         this.vehicle_ticket = vehicle_ticket;
     }
 
-    public Ticket(LocalDate emission_date, double price, Seller seller, List<Trip> trips, Boolean state, Vehicle vehicle_ticket, Subscription subscription_ticket) {
+    public Ticket(LocalDate emission_date, double price, Seller seller, Vehicle vehicle_ticket, Subscription subscription_ticket) {
         super(emission_date, price, seller);
-        this.trips = trips;
-        this.state = state;
         this.vehicle_ticket = vehicle_ticket;
         this.subscription_ticket = subscription_ticket;
+        this.setState();
     }
 
     public Vehicle getVehicle_ticket() {
@@ -79,8 +78,10 @@ public class Ticket extends DocumentOfTravel {
         return state;
     }
 
-    public void setState(Boolean state) {
-        this.state = state;
+    public void setState() {
+        if (this.subscription_ticket.getExpired_date().compareTo(LocalDate.now()) > 0) { // da modificare, controllare anche orario e minuti
+            this.state = true;
+        } else this.state = false;
     }
 
     public User getUser() {

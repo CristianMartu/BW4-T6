@@ -37,4 +37,6 @@ public abstract class DocumentOfTravel {
     public LocalDate getEmission_date() {
         return emission_date;
     }
+
+
 }

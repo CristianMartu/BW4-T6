@@ -113,31 +113,34 @@ public class Main {
         Card cardGiovanni = new Card(giovanni, LocalDate.parse("2023-02-23"));
 
         Subscription subscriptionAldo = new Subscription(LocalDate.now(), 270, milano, SubscriptionState.WEEKLY, cardAldo);
-        Subscription subscriptionGiovanni = new Subscription(LocalDate.parse("2024-01-19"), 270, milano, SubscriptionState.MONTHLY, cardAldo);
+        Subscription subscriptionGiovanni = new Subscription(LocalDate.parse("2024-01-19"), 270, milano, SubscriptionState.MONTHLY, cardGiovanni);
 
-        Ticket ticketAldoByCard = new Ticket(LocalDate.now(), 2, milano, null, aldo, autobus);
+        Ticket ticketAldoByCard = new Ticket(LocalDate.now(), 2, milano, autobus, subscriptionAldo);
+        Ticket ticketGiovanniByCard = new Ticket(LocalDate.now().minusDays(1), 2, roma, autobus, subscriptionGiovanni);
+        
+        userDAO.save(giovanni);
+        userDAO.save(giacomo);
+        userDAO.save(aldo);
+        sellerDAO.save(milano);
+        sellerDAO.save(genova);
+        sellerDAO.save(cagliari);
+        sellerDAO.save(roma);
+        vehicleDAO.save(autobus);
+        vehicleDAO.save(autobus2);
+        vehicleDAO.save(tram);
+        vehicleDAO.save(tram2);
 
-//        userDAO.save(giovanni);
-//        userDAO.save(giacomo);
-//        userDAO.save(aldo);
-//        sellerDAO.save(milano);
-//        sellerDAO.save(genova);
-//        sellerDAO.save(cagliari);
-//        sellerDAO.save(roma);
-//        vehicleDAO.save(autobus);
-//        vehicleDAO.save(autobus2);
-//        vehicleDAO.save(tram);
-//        vehicleDAO.save(tram2);
-//
-//        docDAO.save(ticketGiacomo);
-//        docDAO.save(ticketAldo);
-//        docDAO.save(ticketGiovanni);
-//
-//        cardDAO.save(cardAldo);
-//        cardDAO.save(cardGiovanni);
-//
-//        docDAO.save(subscriptionAldo);
-//        docDAO.save(subscriptionGiovanni);
+        docDAO.save(ticketGiacomo);
+        docDAO.save(ticketAldo);
+        docDAO.save(ticketGiovanni);
+
+        cardDAO.save(cardAldo);
+        cardDAO.save(cardGiovanni);
+
+        docDAO.save(subscriptionAldo);
+        docDAO.save(subscriptionGiovanni);
+
         docDAO.save(ticketAldoByCard);
+        docDAO.save(ticketGiovanniByCard);
     }
 }

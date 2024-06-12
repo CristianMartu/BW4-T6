@@ -29,7 +29,7 @@ public class Subscription extends DocumentOfTravel {
         super(emission_date, price, seller);
         this.state = state;
         this.card = card;
-        setExpired_date();
+        this.setExpired_date();
     }
 
     public List<Ticket> getTicketList() {
