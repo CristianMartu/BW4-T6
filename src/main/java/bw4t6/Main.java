@@ -142,5 +142,13 @@ public class Main {
 
         docDAO.save(ticketAldoByCard);
         docDAO.save(ticketGiovanniByCard);
-    }
+
+        try {
+            Subscription aldoFromDb = docDAO.findSubscriptionById("76e0851c-e432-4fb8-9d43-ba373e871cd6");
+            Ticket ticketAldoByCard2 = new Ticket(LocalDate.now(), 2, roma, tram, aldoFromDb);
+            docDAO.save(ticketAldoByCard2);
+        } catch (RuntimeException error) {
+            System.out.println(error.getMessage());
+        }
+}
 }

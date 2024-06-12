@@ -13,9 +13,6 @@ public class Trip {
     @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle_trip;
 
-    @ManyToMany(mappedBy = "trips")
-    private List<Ticket> tickets;
-
 
     private double average_time;
     private String starting_zone;
@@ -46,14 +43,6 @@ public class Trip {
         this.vehicle_trip = vehicle;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
-
     public String getStarting_zone() {
         return starting_zone;
     }
@@ -75,7 +64,6 @@ public class Trip {
     public String toString() {
         return "Trip{" +
                 "vehicle=" + vehicle_trip +
-                ", tickets=" + tickets +
                 ", average_time=" + average_time +
                 ", starting_zone='" + starting_zone + '\'' +
                 ", finish_zone='" + finish_zone + '\'' +

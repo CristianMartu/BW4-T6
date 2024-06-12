@@ -11,14 +11,6 @@ import java.util.List;
 public class Ticket extends DocumentOfTravel {
 
 
-    @ManyToMany
-    @JoinTable(
-            name = "tickets_trips",
-            joinColumns = @JoinColumn(name = "ticket_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "trip_id", nullable = false)
-    )
-    private List<Trip> trips;
-
     private Boolean state;
 
     @ManyToOne
@@ -66,14 +58,6 @@ public class Ticket extends DocumentOfTravel {
         this.subscription_ticket = subscription_ticket;
     }
 
-    public List<Trip> getTrips() {
-        return trips;
-    }
-
-    public void setTrips(List<Trip> trips) {
-        this.trips = trips;
-    }
-
     public Boolean getState() {
         return state;
     }
@@ -103,7 +87,6 @@ public class Ticket extends DocumentOfTravel {
     @Override
     public String toString() {
         return "Ticket{" +
-                "trips=" + trips +
                 ", state=" + state +
 //                ", user=" + user +
                 ", vehicle_ticket=" + vehicle_ticket +
