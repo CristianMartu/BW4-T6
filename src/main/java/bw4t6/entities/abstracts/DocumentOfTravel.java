@@ -33,4 +33,8 @@ public abstract class DocumentOfTravel {
     public UUID getDocument_id() {
         return document_id;
     }
+
+    public LocalDate getEmission_date() {
+        return emission_date;
+    }
 }

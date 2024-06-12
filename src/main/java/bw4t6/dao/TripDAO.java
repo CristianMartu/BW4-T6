@@ -1,7 +1,6 @@
 package bw4t6.dao;
 
 import bw4t6.entities.Trip;
-import bw4t6.exceptions.MyCustomExeption;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
@@ -13,20 +12,23 @@ public class TripDAO {
     public TripDAO(EntityManager em) {
         this.em = em;
     }
+
     public void save(Trip trip) {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         em.persist(trip);
         tx.commit();
-        System.out.println("elemento salvato");
+        System.out.println(trip + " salvato");
     }
+
     public Trip findById(String id) {
-        Trip trip=   em.find(Trip.class, UUID.fromString(id));
-        if (trip== null) throw new RuntimeException("Trip with id: "+id+" not found");
+        Trip trip = em.find(Trip.class, UUID.fromString(id));
+        if (trip == null) throw new RuntimeException("Trip with id: " + id + " not found");
         return trip;
     }
+
     public void delete(String id) {
-        Trip trip=   this.findById(id);
+        Trip trip = this.findById(id);
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         em.remove(trip);

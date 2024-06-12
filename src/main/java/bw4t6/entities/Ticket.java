@@ -26,8 +26,12 @@ public class Ticket extends DocumentOfTravel {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "vehicle_id", nullable = false)
+    @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle_ticket;
+
+    @ManyToOne
+    @JoinColumn(name = "subscription_id")
+    private Subscription subscription_ticket;
 
     public Ticket() {
     }
@@ -37,6 +41,30 @@ public class Ticket extends DocumentOfTravel {
         this.state = state;
         this.user = user;
         this.vehicle_ticket = vehicle_ticket;
+    }
+
+    public Ticket(LocalDate emission_date, double price, Seller seller, List<Trip> trips, Boolean state, Vehicle vehicle_ticket, Subscription subscription_ticket) {
+        super(emission_date, price, seller);
+        this.trips = trips;
+        this.state = state;
+        this.vehicle_ticket = vehicle_ticket;
+        this.subscription_ticket = subscription_ticket;
+    }
+
+    public Vehicle getVehicle_ticket() {
+        return vehicle_ticket;
+    }
+
+    public void setVehicle_ticket(Vehicle vehicle_ticket) {
+        this.vehicle_ticket = vehicle_ticket;
+    }
+
+    public Subscription getSubscription_ticket() {
+        return subscription_ticket;
+    }
+
+    public void setSubscription_ticket(Subscription subscription_ticket) {
+        this.subscription_ticket = subscription_ticket;
     }
 
     public List<Trip> getTrips() {
@@ -76,7 +104,7 @@ public class Ticket extends DocumentOfTravel {
         return "Ticket{" +
                 "trips=" + trips +
                 ", state=" + state +
-                ", user=" + user +
+//                ", user=" + user +
                 ", vehicle_ticket=" + vehicle_ticket +
                 ", document_id=" + document_id +
                 ", emission_date=" + emission_date +

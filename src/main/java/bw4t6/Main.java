@@ -3,6 +3,7 @@ package bw4t6;
 import bw4t6.dao.*;
 import bw4t6.entities.*;
 import bw4t6.enums.AutomaticSellerState;
+import bw4t6.enums.SubscriptionState;
 import bw4t6.enums.VehicleType;
 import com.github.javafaker.Faker;
 import jakarta.persistence.EntityManager;
@@ -108,6 +109,12 @@ public class Main {
         Ticket ticketGiacomo = new Ticket(LocalDate.of(2024, 9, 9), 1.5, roma, true, giacomo, tram);
         Ticket ticketGiovanni = new Ticket(LocalDate.of(2024, 9, 9), 1.5, cagliari, true, giovanni, autobus);
 
+        Card cardAldo = new Card(aldo, LocalDate.now().plusYears(1));
+        Card cardGiovanni = new Card(giovanni, LocalDate.parse("2023-02-23"));
+
+        Subscription subscriptionAldo = new Subscription(LocalDate.now(), 270, milano, SubscriptionState.WEEKLY, cardAldo);
+        Subscription subscriptionGiovanni = new Subscription(LocalDate.parse("2024-01-19"), 270, milano, SubscriptionState.MONTHLY, cardAldo);
+
         userDAO.save(giovanni);
         userDAO.save(giacomo);
         userDAO.save(aldo);
@@ -119,9 +126,15 @@ public class Main {
         vehicleDAO.save(autobus2);
         vehicleDAO.save(tram);
         vehicleDAO.save(tram2);
+
         docDAO.save(ticketGiacomo);
         docDAO.save(ticketAldo);
         docDAO.save(ticketGiovanni);
-        
+
+        cardDAO.save(cardAldo);
+        cardDAO.save(cardGiovanni);
+
+        docDAO.save(subscriptionAldo);
+        docDAO.save(subscriptionGiovanni);
     }
 }
