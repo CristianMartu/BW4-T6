@@ -1,10 +1,15 @@
 package bw4t6.dao;
 
+import bw4t6.entities.Card;
 import bw4t6.entities.Subscription;
 import bw4t6.entities.abstracts.DocumentOfTravel;
+import bw4t6.enums.SubscriptionState;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class DocumentOfTravelDAO {
@@ -41,4 +46,16 @@ public class DocumentOfTravelDAO {
         em.remove(document);
         tx.commit();
     }
-}
+    public void validitySubscription(String id){
+        TypedQuery<Subscription> query= em.createQuery("SELECT c FROM Subscription c  WHERE c.card.user.card_id = :id", Subscription.class);
+        query.setParameter("id",UUID.fromString(id));
+        query.getResultList().forEach(subscription -> {
+            if(subscription.getExpired_date().isBefore(LocalDateTime.now())){
+                System.out.println("tessera scaduta!");
+            }else{
+                System.out.println("tessera valida");
+            }
+        });
+        }
+    }
+

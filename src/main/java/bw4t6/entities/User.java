@@ -82,7 +82,6 @@ public class User {
     public String toString() {
         return "User{" +
                 "card_id=" + card_id +
-                ", cards=" + cards +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", date_of_birth=" + date_of_birth +

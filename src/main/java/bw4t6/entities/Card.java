@@ -51,7 +51,6 @@ public class Card {
     public String toString() {
         return "Card{" +
                 "user=" + user +
-                ", subscriptionList=" + subscriptionList +
                 ", expired_date=" + expired_date +
                 '}';
     }

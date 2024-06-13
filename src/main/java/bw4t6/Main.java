@@ -117,7 +117,7 @@ public class Main {
         Card cardGiovanni = new Card(giovanni, LocalDate.parse("2023-02-23"));
 
         Subscription subscriptionAldo = new Subscription(LocalDateTime.now(), 270, milano, SubscriptionState.WEEKLY, cardAldo);
-        Subscription subscriptionGiovanni = new Subscription(LocalDateTime.now().minusMonths(1), 270, milano, SubscriptionState.MONTHLY, cardGiovanni);
+        Subscription subscriptionGiovanni = new Subscription(LocalDateTime.now().minusMonths(5), 270, milano, SubscriptionState.MONTHLY, cardGiovanni);
 
         // Extra aggiungere controllo scadenza card per creazione ticket
         Ticket ticketAldoByCard = new Ticket(LocalDateTime.now(), milano, autobus, subscriptionAldo, 90);
@@ -173,8 +173,8 @@ public class Main {
 //        distanceDAO.save(percorrenza2Autobus2);
 //        distanceDAO.save(percorrenza3Autobus2);
 //        distanceDAO.save(percorrenza4Autobus2);
-
-
+//
+//
 //        maintenanceDAO.save(new Maintenance("davide ha rotto l'autobus (rotto le ruote)",autobus2, null,LocalDate.now().minusDays(18)));
 //        maintenanceDAO.save(new Maintenance("Marina ha dato fuoco agli specchietti", autobus2, LocalDate.now().minusDays(3), LocalDate.now().minusDays(10)));
 //        maintenanceDAO.save(new Maintenance("Luca come autista fa schifo", tram, LocalDate.now().minusDays(50), LocalDate.now().minusDays(60)));
@@ -219,9 +219,18 @@ public class Main {
 
         System.out.println("***********************maintenanceByVehicleId*************************");
         maintenanceDAO.maintenanceByVehicleId("aeba9b8e-fc5e-43fd-910c-a8f739f0593d").forEach(System.out::println);
-        System.out.println("***********************automaticsellerquery*************************");
+
+        System.out.println("***********************findActiveAutomaticSeller*************************");
         shopDAO.findActiveAutomaticSeller().forEach(System.out::println);
 
+        System.out.println("***********************serviceByVehicleId*************************");
+        vehicleDAO.serviceByVehicleId().forEach(System.out::println);
+
+        System.out.println("***********************validitySubscription*************************");
+        docDAO.validitySubscription("37d98088-3f68-47ec-81e1-0beeea7a3bcb");
+
+        System.out.println("***********************validitySubscription*************************");
+        docDAO.validitySubscription("37d98088-3f68-47ec-81e1-0beeea7a3bcb");
 
     }
 }
