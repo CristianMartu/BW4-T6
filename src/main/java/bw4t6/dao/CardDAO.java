@@ -18,7 +18,7 @@ public class CardDAO {
         tx.begin();
         em.persist(card);
         tx.commit();
-        System.out.println(card + " salvato");
+        System.out.println(card);
     }
 
     public Card findById(String id) {
@@ -33,6 +33,5 @@ public class CardDAO {
         tx.begin();
         em.remove(card);
         tx.commit();
-
     }
 }

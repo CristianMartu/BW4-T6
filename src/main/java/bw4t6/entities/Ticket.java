@@ -1,12 +1,13 @@
 package bw4t6.entities;
 
 import bw4t6.entities.abstracts.DocumentOfTravel;
+import bw4t6.entities.abstracts.Shop;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @DiscriminatorValue("tickets")
@@ -27,21 +28,61 @@ public class Ticket extends DocumentOfTravel {
     @JoinColumn(name = "subscription_id")
     private Subscription subscription_ticket;
 
+    private int duration_validity;
+    private LocalDateTime expired_date;
+
     public Ticket() {
     }
 
-    public Ticket(LocalDate emission_date, double price, Seller seller, Boolean state, User user, Vehicle vehicle_ticket) {
-        super(emission_date, price, seller);
-        this.state = state;
-        this.user = user;
-        this.vehicle_ticket = vehicle_ticket;
-    }
+//    public Ticket(LocalDateTime emission_date, double price, Shop shop, Boolean state, User user, Vehicle vehicle_ticket, LocalDateTime expired_date) {
+//        super(emission_date, price, shop);
+//        this.state = state;
+//        this.user = user;
+//        this.vehicle_ticket = vehicle_ticket;
+//        this.expired_date = expired_date;
+//    }
+//
+//    public Ticket(LocalDateTime emission_date, Shop shop, Vehicle vehicle_ticket, Subscription subscription_ticket, Boolean state, LocalDateTime expired_date) {
+//        super(emission_date, shop);
+//        this.vehicle_ticket = vehicle_ticket;
+//        this.subscription_ticket = subscription_ticket;
+//        this.state = state;
+//        this.expired_date = expired_date;
+//    }
 
-    public Ticket(LocalDate emission_date, Seller seller, Vehicle vehicle_ticket, Subscription subscription_ticket, Boolean state) {
-        super(emission_date, seller);
+    public Ticket(LocalDateTime emission_date, Shop shop, Vehicle vehicle_ticket, Subscription subscription_ticket, Integer duration_validity) {
+        super(emission_date, shop);
         this.vehicle_ticket = vehicle_ticket;
         this.subscription_ticket = subscription_ticket;
-        this.state = state;
+        this.duration_validity = duration_validity;
+        this.setExpired_date();
+        this.setState();
+    }
+
+    public Ticket(LocalDateTime emission_date, double price, Shop shop, User user, Vehicle vehicle_ticket, int duration_validity) {
+        super(price, shop);
+        this.emission_date = emission_date;
+        this.vehicle_ticket = vehicle_ticket;
+        this.user = user;
+        this.duration_validity = duration_validity;
+        this.setExpired_date();
+        this.setState();
+    }
+
+    public int getDuration_validity() {
+        return duration_validity;
+    }
+
+    public void setDuration_validity(int duration_validity) {
+        this.duration_validity = duration_validity;
+    }
+
+    public LocalDateTime getExpired_date() {
+        return expired_date;
+    }
+
+    public void setExpired_date() {
+        this.expired_date = this.emission_date.plusMinutes(this.duration_validity);
     }
 
     public Vehicle getVehicle_ticket() {
@@ -64,8 +105,10 @@ public class Ticket extends DocumentOfTravel {
         return state;
     }
 
-    public void setState(Boolean state) {
-        this.state = state;
+    public void setState() {
+        if (LocalDateTime.now().isBefore(this.expired_date)) {
+            this.state = true;
+        } else this.state = false;
     }
 
     public User getUser() {

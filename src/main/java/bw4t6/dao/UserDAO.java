@@ -18,7 +18,7 @@ public class UserDAO {
         tx.begin();
         em.persist(user);
         tx.commit();
-        System.out.println(user + " salvato");
+        System.out.println(user);
     }
 
     public User findById(String id) {

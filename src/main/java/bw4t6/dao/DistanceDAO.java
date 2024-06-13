@@ -3,12 +3,12 @@ package bw4t6.dao;
 import bw4t6.entities.Distance;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Query;
 
 import java.util.UUID;
 
 public class DistanceDAO {
     private final EntityManager em;
+
     public DistanceDAO(EntityManager em) {
         this.em = em;
     }
@@ -18,7 +18,7 @@ public class DistanceDAO {
         tx.begin();
         em.persist(distance);
         tx.commit();
-        System.out.println(distance + " salvato");
+        System.out.println(distance);
     }
 
     public Distance findById(String id) {
@@ -27,10 +27,10 @@ public class DistanceDAO {
         return distance;
     }
 
-    public void update(UUID id){
+    public void update(UUID id) {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        Distance distance = em.find(Distance.class,id);
+        Distance distance = em.find(Distance.class, id);
         distance.setNumber_of_trip(distance.getNumber_of_trip() + 1);
         tx.commit();
         System.out.println(distance);

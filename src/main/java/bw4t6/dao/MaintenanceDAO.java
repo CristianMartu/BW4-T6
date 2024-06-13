@@ -18,7 +18,7 @@ public class MaintenanceDAO {
         tx.begin();
         em.persist(maintenance);
         tx.commit();
-        System.out.println(maintenance + " salvato");
+        System.out.println(maintenance);
     }
 
     public Maintenance findById(String id) {

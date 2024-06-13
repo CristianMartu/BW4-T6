@@ -1,10 +1,11 @@
 package bw4t6.entities;
 
 import bw4t6.entities.abstracts.DocumentOfTravel;
+import bw4t6.entities.abstracts.Shop;
 import bw4t6.enums.SubscriptionState;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ public class Subscription extends DocumentOfTravel {
     @ManyToOne
     @JoinColumn(name = "card_id", nullable = false)
     private Card card;
-    private LocalDate expired_date;
+    private LocalDateTime expired_date;
 
     @OneToMany(mappedBy = "subscription_ticket")
     private List<Ticket> ticketList;
@@ -25,8 +26,8 @@ public class Subscription extends DocumentOfTravel {
     public Subscription() {
     }
 
-    public Subscription(LocalDate emission_date, double price, Seller seller, SubscriptionState state, Card card) {
-        super(emission_date, price, seller);
+    public Subscription(LocalDateTime emission_date, double price, Shop shop, SubscriptionState state, Card card) {
+        super(emission_date, price, shop);
         this.state = state;
         this.card = card;
         this.setExpired_date();
@@ -56,7 +57,7 @@ public class Subscription extends DocumentOfTravel {
         this.card = card;
     }
 
-    public LocalDate getExpired_date() {
+    public LocalDateTime getExpired_date() {
         return expired_date;
     }
 

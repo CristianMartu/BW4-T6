@@ -19,7 +19,7 @@ public class DocumentOfTravelDAO {
         tx.begin();
         em.persist(document);
         tx.commit();
-        System.out.println(document + " salvato");
+        System.out.println(document);
     }
 
     public DocumentOfTravelDAO findById(String id) {

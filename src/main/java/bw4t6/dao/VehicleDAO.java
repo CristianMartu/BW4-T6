@@ -18,7 +18,7 @@ public class VehicleDAO {
         tx.begin();
         em.persist(vehicle);
         tx.commit();
-        System.out.println(vehicle + " salvato");
+        System.out.println(vehicle);
     }
 
     public Vehicle findById(String id) {

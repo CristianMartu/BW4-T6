@@ -18,8 +18,8 @@ public class TripDAO {
         tx.begin();
         em.persist(trip);
         tx.commit();
-        System.out.println(trip + " salvato");
-        DistanceDAO  distanceDAO = new DistanceDAO(em);
+        System.out.println(trip);
+        DistanceDAO distanceDAO = new DistanceDAO(em);
         distanceDAO.update(trip.getDistance_trip().getDistance_id());
     }
 
