@@ -2,7 +2,6 @@ package bw4t6.entities.abstracts;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -50,4 +49,7 @@ public abstract class DocumentOfTravel {
         return emission_date;
     }
 
+    public Shop getShop() {
+        return shop;
+    }
 }

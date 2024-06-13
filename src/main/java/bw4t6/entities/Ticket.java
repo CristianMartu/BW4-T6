@@ -34,22 +34,6 @@ public class Ticket extends DocumentOfTravel {
     public Ticket() {
     }
 
-//    public Ticket(LocalDateTime emission_date, double price, Shop shop, Boolean state, User user, Vehicle vehicle_ticket, LocalDateTime expired_date) {
-//        super(emission_date, price, shop);
-//        this.state = state;
-//        this.user = user;
-//        this.vehicle_ticket = vehicle_ticket;
-//        this.expired_date = expired_date;
-//    }
-//
-//    public Ticket(LocalDateTime emission_date, Shop shop, Vehicle vehicle_ticket, Subscription subscription_ticket, Boolean state, LocalDateTime expired_date) {
-//        super(emission_date, shop);
-//        this.vehicle_ticket = vehicle_ticket;
-//        this.subscription_ticket = subscription_ticket;
-//        this.state = state;
-//        this.expired_date = expired_date;
-//    }
-
     public Ticket(LocalDateTime emission_date, Shop shop, Vehicle vehicle_ticket, Subscription subscription_ticket, Integer duration_validity) {
         super(emission_date, shop);
         this.vehicle_ticket = vehicle_ticket;

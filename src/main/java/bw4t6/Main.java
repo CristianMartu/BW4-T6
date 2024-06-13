@@ -135,7 +135,7 @@ public class Main {
         Distance percorrenza2Autobus2 = new Distance(65.0, autobus2);
         Distance percorrenza3Autobus2 = new Distance(245.0, autobus2);
         Distance percorrenza4Autobus2 = new Distance(165.0, autobus2);
-
+///// DA COMMENTARE
 //        userDAO.save(giovanni);
 //        userDAO.save(giacomo);
 //        userDAO.save(aldo);
@@ -175,7 +175,7 @@ public class Main {
 //        distanceDAO.save(percorrenza4Autobus2);
 //
 //
-//        maintenanceDAO.save(new Maintenance("davide ha rotto l'autobus (rotto le ruote)",autobus2, null,LocalDate.now().minusDays(18)));
+//        maintenanceDAO.save(new Maintenance("davide ha rotto l'autobus (rotto le ruote)", autobus2, null, LocalDate.now().minusDays(18)));
 //        maintenanceDAO.save(new Maintenance("Marina ha dato fuoco agli specchietti", autobus2, LocalDate.now().minusDays(3), LocalDate.now().minusDays(10)));
 //        maintenanceDAO.save(new Maintenance("Luca come autista fa schifo", tram, LocalDate.now().minusDays(50), LocalDate.now().minusDays(60)));
 //        maintenanceDAO.save(new Maintenance("Cristian non sapeva la strada ed è finito in un fosso", tram2, LocalDate.now().minusDays(30), LocalDate.now().minusDays(15)));
@@ -193,8 +193,7 @@ public class Main {
 //        tripDAO.save(new Trip(percorrenza2Autobus2, 100, "Bologna", "Milano"));
 //        tripDAO.save(new Trip(percorrenza3Autobus2, 10, "Milano", "Napoli"));
 //        tripDAO.save(new Trip(percorrenza4Autobus2, 15, "Trieste", "Catania"));
-
-
+////// DA COMMENTARE
 
         // aggiungere un biglietto tramite abbonamento
         try {
@@ -229,8 +228,9 @@ public class Main {
         System.out.println("***********************validitySubscription*************************");
         docDAO.validitySubscription("37d98088-3f68-47ec-81e1-0beeea7a3bcb");
 
-        System.out.println("***********************validitySubscription*************************");
-        docDAO.validitySubscription("37d98088-3f68-47ec-81e1-0beeea7a3bcb");
+        System.out.println("***********************findSoldByTime*************************");
+        shopDAO.findSoldByTime(LocalDateTime.now().minusHours(5), LocalDateTime.now().plusDays(1), "Milano").forEach(System.out::println);
+
 
     }
 }
