@@ -1,9 +1,13 @@
 package bw4t6.dao;
 
+import bw4t6.entities.AutomaticSeller;
 import bw4t6.entities.abstracts.Shop;
+import bw4t6.enums.AutomaticSellerState;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
+import java.util.List;
 import java.util.UUID;
 
 public class ShopDAO {
@@ -36,5 +40,10 @@ public class ShopDAO {
         em.remove(shop);
         tx.commit();
 
+    }
+    public List<AutomaticSeller> findActiveAutomaticSeller() {
+        TypedQuery<AutomaticSeller> query = em.createQuery("SELECT s FROM AutomaticSeller s WHERE s.state = :state", AutomaticSeller.class);
+        query.setParameter("state", AutomaticSellerState.IN_SERVICE);
+        return query.getResultList();
     }
 }

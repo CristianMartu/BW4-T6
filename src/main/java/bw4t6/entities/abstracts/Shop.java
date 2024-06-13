@@ -11,7 +11,7 @@ import java.util.UUID;
 public abstract class Shop {
     @Id
     //@GeneratedValue // da riattivare dopo
-    protected UUID seller_id;
+    protected UUID shop_id;
 
     protected String emission_point;
 
@@ -25,13 +25,13 @@ public abstract class Shop {
         this.emission_point = emission_point;
     }
 
-    public Shop(String seller_id, String emission_point) {
-        this.seller_id = UUID.fromString(seller_id);
+    public Shop(String shop_id, String emission_point) {
+        this.shop_id = UUID.fromString(shop_id);
         this.emission_point = emission_point;
     }
 
     public UUID getSeller_id() {
-        return seller_id;
+        return shop_id;
     }
 
 
@@ -54,7 +54,7 @@ public abstract class Shop {
     @Override
     public String toString() {
         return "Shop{" +
-                "seller_id=" + seller_id +
+                "seller_id=" + shop_id +
                 ", emission_point='" + emission_point + '\'' +
                 ", documentOfTravels=" + documentOfTravels +
                 '}';

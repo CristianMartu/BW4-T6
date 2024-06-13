@@ -136,63 +136,63 @@ public class Main {
         Distance percorrenza3Autobus2 = new Distance(245.0, autobus2);
         Distance percorrenza4Autobus2 = new Distance(165.0, autobus2);
 
-        userDAO.save(giovanni);
-        userDAO.save(giacomo);
-        userDAO.save(aldo);
-        shopDAO.save(milano);
-        shopDAO.save(genova);
-        shopDAO.save(cagliari);
-        shopDAO.save(roma);
-        vehicleDAO.save(autobus);
-        vehicleDAO.save(autobus2);
-        vehicleDAO.save(tram);
-        vehicleDAO.save(tram2);
+//        userDAO.save(giovanni);
+//        userDAO.save(giacomo);
+//        userDAO.save(aldo);
+//        shopDAO.save(milano);
+//        shopDAO.save(genova);
+//        shopDAO.save(cagliari);
+//        shopDAO.save(roma);
+//        vehicleDAO.save(autobus);
+//        vehicleDAO.save(autobus2);
+//        vehicleDAO.save(tram);
+//        vehicleDAO.save(tram2);
+//
+//        docDAO.save(ticketGiacomo);
+//        docDAO.save(ticketAldo);
+//        docDAO.save(ticketGiovanni);
+//
+//        cardDAO.save(cardAldo);
+//        cardDAO.save(cardGiovanni);
+//
+//        docDAO.save(subscriptionAldo);
+//        docDAO.save(subscriptionGiovanni);
+//
+//        docDAO.save(ticketAldoByCard);
+//        docDAO.save(ticketGiovanniByCard);
+//
+//        distanceDAO.save(percorrenza1tram);
+//        distanceDAO.save(percorrenza2tram);
+//        distanceDAO.save(percorrenza3tram);
+//        distanceDAO.save(percorrenza1Autobus);
+//        distanceDAO.save(percorrenza2Autobus);
+//        distanceDAO.save(percorrenza3Autobus);
+//        distanceDAO.save(percorrenza1Tram2);
+//        distanceDAO.save(percorrenza2Tram2);
+//        distanceDAO.save(percorrenza1Autobus2);
+//        distanceDAO.save(percorrenza2Autobus2);
+//        distanceDAO.save(percorrenza3Autobus2);
+//        distanceDAO.save(percorrenza4Autobus2);
 
-        docDAO.save(ticketGiacomo);
-        docDAO.save(ticketAldo);
-        docDAO.save(ticketGiovanni);
 
-        cardDAO.save(cardAldo);
-        cardDAO.save(cardGiovanni);
-
-        docDAO.save(subscriptionAldo);
-        docDAO.save(subscriptionGiovanni);
-
-        docDAO.save(ticketAldoByCard);
-        docDAO.save(ticketGiovanniByCard);
-
-        distanceDAO.save(percorrenza1tram);
-        distanceDAO.save(percorrenza2tram);
-        distanceDAO.save(percorrenza3tram);
-        distanceDAO.save(percorrenza1Autobus);
-        distanceDAO.save(percorrenza2Autobus);
-        distanceDAO.save(percorrenza3Autobus);
-        distanceDAO.save(percorrenza1Tram2);
-        distanceDAO.save(percorrenza2Tram2);
-        distanceDAO.save(percorrenza1Autobus2);
-        distanceDAO.save(percorrenza2Autobus2);
-        distanceDAO.save(percorrenza3Autobus2);
-        distanceDAO.save(percorrenza4Autobus2);
-
-
-        maintenanceDAO.save(new Maintenance("davide ha rotto l'autobus (rotto le ruote)",autobus2, null,LocalDate.now().minusDays(18)));
-        maintenanceDAO.save(new Maintenance("Marina ha dato fuoco agli specchietti", autobus2, LocalDate.now().minusDays(3), LocalDate.now().minusDays(10)));
-        maintenanceDAO.save(new Maintenance("Luca come autista fa schifo", tram, LocalDate.now().minusDays(50), LocalDate.now().minusDays(60)));
-        maintenanceDAO.save(new Maintenance("Cristian non sapeva la strada ed è finito in un fosso", tram2, LocalDate.now().minusDays(30), LocalDate.now().minusDays(15)));
-        maintenanceDAO.save(new Maintenance("Federico ha investito Davide e ha danneggiato la carrozzeria", autobus, null, LocalDate.now().minusDays(10)));
-
-        tripDAO.save(new Trip(percorrenza1tram, 60, "Latina", "Roma"));
-        tripDAO.save(new Trip(percorrenza2tram, 40, "Latina", "Aprilia"));
-        tripDAO.save(new Trip(percorrenza3tram, 50, "Latina", "Pomezia"));
-        tripDAO.save(new Trip(percorrenza1Autobus, 120, "Cagliari", "Quartu"));
-        tripDAO.save(new Trip(percorrenza2Autobus, 100, "Cagliari", "Oristano"));
-        tripDAO.save(new Trip(percorrenza3Autobus, 160, "Cagliari", "Sassari"));
-        tripDAO.save(new Trip(percorrenza1Tram2, 60, "Reggio", "Modena"));
-        tripDAO.save(new Trip(percorrenza2Tram2, 30, "Modena", "Parma"));
-        tripDAO.save(new Trip(percorrenza1Autobus2, 400, "Bologna", "Roma"));
-        tripDAO.save(new Trip(percorrenza2Autobus2, 100, "Bologna", "Milano"));
-        tripDAO.save(new Trip(percorrenza3Autobus2, 10, "Milano", "Napoli"));
-        tripDAO.save(new Trip(percorrenza4Autobus2, 15, "Trieste", "Catania"));
+//        maintenanceDAO.save(new Maintenance("davide ha rotto l'autobus (rotto le ruote)",autobus2, null,LocalDate.now().minusDays(18)));
+//        maintenanceDAO.save(new Maintenance("Marina ha dato fuoco agli specchietti", autobus2, LocalDate.now().minusDays(3), LocalDate.now().minusDays(10)));
+//        maintenanceDAO.save(new Maintenance("Luca come autista fa schifo", tram, LocalDate.now().minusDays(50), LocalDate.now().minusDays(60)));
+//        maintenanceDAO.save(new Maintenance("Cristian non sapeva la strada ed è finito in un fosso", tram2, LocalDate.now().minusDays(30), LocalDate.now().minusDays(15)));
+//        maintenanceDAO.save(new Maintenance("Federico ha investito Davide e ha danneggiato la carrozzeria", autobus, null, LocalDate.now().minusDays(10)));
+//
+//        tripDAO.save(new Trip(percorrenza1tram, 60, "Latina", "Roma"));
+//        tripDAO.save(new Trip(percorrenza2tram, 40, "Latina", "Aprilia"));
+//        tripDAO.save(new Trip(percorrenza3tram, 50, "Latina", "Pomezia"));
+//        tripDAO.save(new Trip(percorrenza1Autobus, 120, "Cagliari", "Quartu"));
+//        tripDAO.save(new Trip(percorrenza2Autobus, 100, "Cagliari", "Oristano"));
+//        tripDAO.save(new Trip(percorrenza3Autobus, 160, "Cagliari", "Sassari"));
+//        tripDAO.save(new Trip(percorrenza1Tram2, 60, "Reggio", "Modena"));
+//        tripDAO.save(new Trip(percorrenza2Tram2, 30, "Modena", "Parma"));
+//        tripDAO.save(new Trip(percorrenza1Autobus2, 400, "Bologna", "Roma"));
+//        tripDAO.save(new Trip(percorrenza2Autobus2, 100, "Bologna", "Milano"));
+//        tripDAO.save(new Trip(percorrenza3Autobus2, 10, "Milano", "Napoli"));
+//        tripDAO.save(new Trip(percorrenza4Autobus2, 15, "Trieste", "Catania"));
 
 
 
@@ -219,6 +219,8 @@ public class Main {
 
         System.out.println("***********************maintenanceByVehicleId*************************");
         maintenanceDAO.maintenanceByVehicleId("aeba9b8e-fc5e-43fd-910c-a8f739f0593d").forEach(System.out::println);
+        System.out.println("***********************automaticsellerquery*************************");
+        shopDAO.findActiveAutomaticSeller().forEach(System.out::println);
 
 
     }
