@@ -123,11 +123,18 @@ public class Main {
         Ticket ticketAldoByCard = new Ticket(LocalDateTime.now(), milano, autobus, subscriptionAldo, 90);
         Ticket ticketGiovanniByCard = new Ticket(LocalDateTime.now().minusDays(1), roma, autobus, subscriptionGiovanni, 90);
 
-        Maintenance maintenenceAutobus = new Maintenance("davide ha rotto l'autobus (rotto le ruote)", autobus2, null, LocalDate.now().minusDays(18));
-
-        Distance percorrenza1 = new Distance(45.0, tram);
-
-        Trip trip = new Trip(percorrenza1, 60, "Latina", "Roma");
+        Distance percorrenza1tram = new Distance(45.0, tram);
+        Distance percorrenza2tram = new Distance(125.0, tram);
+        Distance percorrenza3tram = new Distance(15.0, tram);
+        Distance percorrenza1Autobus = new Distance(100.0, autobus);
+        Distance percorrenza2Autobus = new Distance(190.0, autobus);
+        Distance percorrenza3Autobus = new Distance(90.0, autobus);
+        Distance percorrenza1Tram2 = new Distance(23.0, tram2);
+        Distance percorrenza2Tram2 = new Distance(30.0, tram2);
+        Distance percorrenza1Autobus2 = new Distance(405.0, autobus2);
+        Distance percorrenza2Autobus2 = new Distance(65.0, autobus2);
+        Distance percorrenza3Autobus2 = new Distance(245.0, autobus2);
+        Distance percorrenza4Autobus2 = new Distance(165.0, autobus2);
 
         userDAO.save(giovanni);
         userDAO.save(giacomo);
@@ -154,10 +161,39 @@ public class Main {
         docDAO.save(ticketAldoByCard);
         docDAO.save(ticketGiovanniByCard);
 
-        maintenanceDAO.save(maintenenceAutobus);
+        distanceDAO.save(percorrenza1tram);
+        distanceDAO.save(percorrenza2tram);
+        distanceDAO.save(percorrenza3tram);
+        distanceDAO.save(percorrenza1Autobus);
+        distanceDAO.save(percorrenza2Autobus);
+        distanceDAO.save(percorrenza3Autobus);
+        distanceDAO.save(percorrenza1Tram2);
+        distanceDAO.save(percorrenza2Tram2);
+        distanceDAO.save(percorrenza1Autobus2);
+        distanceDAO.save(percorrenza2Autobus2);
+        distanceDAO.save(percorrenza3Autobus2);
+        distanceDAO.save(percorrenza4Autobus2);
 
-        distanceDAO.save(percorrenza1);
-        tripDAO.save(trip);
+
+        maintenanceDAO.save(new Maintenance("davide ha rotto l'autobus (rotto le ruote)",autobus2, null,LocalDate.now().minusDays(18)));
+        maintenanceDAO.save(new Maintenance("Marina ha dato fuoco agli specchietti", autobus2, LocalDate.now().minusDays(3), LocalDate.now().minusDays(10)));
+        maintenanceDAO.save(new Maintenance("Luca come autista fa schifo", tram, LocalDate.now().minusDays(50), LocalDate.now().minusDays(60)));
+        maintenanceDAO.save(new Maintenance("Cristian non sapeva la strada ed è finito in un fosso", tram2, LocalDate.now().minusDays(30), LocalDate.now().minusDays(15)));
+        maintenanceDAO.save(new Maintenance("Federico ha investito Davide e ha danneggiato la carrozzeria", autobus, null, LocalDate.now().minusDays(10)));
+
+        tripDAO.save(new Trip(percorrenza1tram, 60, "Latina", "Roma"));
+        tripDAO.save(new Trip(percorrenza2tram, 40, "Latina", "Aprilia"));
+        tripDAO.save(new Trip(percorrenza3tram, 50, "Latina", "Pomezia"));
+        tripDAO.save(new Trip(percorrenza1Autobus, 120, "Cagliari", "Quartu"));
+        tripDAO.save(new Trip(percorrenza2Autobus, 100, "Cagliari", "Oristano"));
+        tripDAO.save(new Trip(percorrenza3Autobus, 160, "Cagliari", "Sassari"));
+        tripDAO.save(new Trip(percorrenza1Tram2, 60, "Reggio", "Modena"));
+        tripDAO.save(new Trip(percorrenza2Tram2, 30, "Modena", "Parma"));
+        tripDAO.save(new Trip(percorrenza1Autobus2, 400, "Bologna", "Roma"));
+        tripDAO.save(new Trip(percorrenza2Autobus2, 100, "Bologna", "Milano"));
+        tripDAO.save(new Trip(percorrenza3Autobus2, 10, "Milano", "Napoli"));
+        tripDAO.save(new Trip(percorrenza4Autobus2, 15, "Trieste", "Catania"));
+
 
 
         // aggiungere un biglietto tramite abbonamento
@@ -180,6 +216,10 @@ public class Main {
         } catch (RuntimeException error) {
             System.out.println(error.getMessage());
         }
+
+        System.out.println("***********************maintenanceByVehicleId*************************");
+        maintenanceDAO.maintenanceByVehicleId("aeba9b8e-fc5e-43fd-910c-a8f739f0593d").forEach(System.out::println);
+
 
     }
 }

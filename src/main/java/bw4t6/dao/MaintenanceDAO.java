@@ -3,7 +3,10 @@ package bw4t6.dao;
 import bw4t6.entities.Maintenance;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
+import java.util.List;
 import java.util.UUID;
 
 public class MaintenanceDAO {
@@ -34,5 +37,10 @@ public class MaintenanceDAO {
         em.remove(maintenance);
         tx.commit();
 
+    }
+    public List<Maintenance> maintenanceByVehicleId(String id){
+        TypedQuery<Maintenance> query = em.createQuery("SELECT m FROM Maintenance m WHERE m.vehicle_maintenance.vehicle_id = :id", Maintenance.class);
+        query.setParameter("id",UUID.fromString(id));
+        return query.getResultList();
     }
 }
