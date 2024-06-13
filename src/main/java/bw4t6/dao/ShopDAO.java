@@ -64,4 +64,20 @@ public class ShopDAO {
         query.setParameter("date2", date2);
         return query.getResultList().stream().filter(document -> document.getShop().getSeller_id() == sellerId).toList();
     }
+
+    public List<DocumentOfTravel> findSubByTime(LocalDateTime date1, LocalDateTime date2, String name) {
+        List<Shop> result = findSoldByShop(name);
+        UUID sellerId = result.get(0).getSeller_id();
+        TypedQuery<DocumentOfTravel> query = em.createQuery("SELECT d FROM DocumentOfTravel d WHERE d.emission_date BETWEEN :date1 AND :date2", DocumentOfTravel.class);
+        query.setParameter("date1", date1);
+        query.setParameter("date2", date2);
+        return query.getResultList().stream().filter(document -> document.getShop().getSeller_id() == sellerId).toList();
+    }
+
+    public List<DocumentOfTravel> findTicketByTime(LocalDateTime date1, LocalDateTime date2) {
+        TypedQuery<DocumentOfTravel> query = em.createQuery("SELECT d FROM DocumentOfTravel d WHERE d.emission_date BETWEEN :date1 AND :date2", DocumentOfTravel.class);
+        query.setParameter("date1", date1);
+        query.setParameter("date2", date2);
+        return query.getResultList();
+    }
 }

@@ -53,6 +53,7 @@ public class Ticket extends DocumentOfTravel {
         this.setState();
     }
 
+
     public int getDuration_validity() {
         return duration_validity;
     }
