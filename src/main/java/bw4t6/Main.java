@@ -197,7 +197,7 @@ public class Main {
 
         // aggiungere un biglietto tramite abbonamento
         try {
-            Subscription aldoFromDb = docDAO.findSubscriptionById("c4c1262f-bfe0-4508-91b9-92065445ddde");
+            Subscription aldoFromDb = docDAO.findSubscriptionById("3e914e68-434d-4f50-9890-ed56dc30acd0");
             Ticket ticketAldoByCard2 = new Ticket(LocalDateTime.now(), roma, tram, aldoFromDb, 90);
             Ticket ticketAldoByCard3 = new Ticket(LocalDateTime.now().minusMonths(1), roma, tram, aldoFromDb, 90);
             docDAO.save(ticketAldoByCard2);
@@ -233,7 +233,7 @@ public class Main {
 
 
         System.out.println("***********************countValidatedTicketsByTime*************************");
-        docDAO.countValidatedTicketsByTime(LocalDateTime.now().minusDays(5), LocalDateTime.now().plusDays(1));
+        docDAO.countValidatedTicketsByTime(LocalDateTime.now().minusDays(30), LocalDateTime.now().plusDays(1));
 
         System.out.println("***********************countValidatedTicketsByVehicle*************************");
         docDAO.countValidatedTicketsByVehicle(UUID.fromString("1c150e5b-ab0d-4827-b7d2-2fe111399c65"));

@@ -1,12 +1,14 @@
 package bw4t6.dao;
 
 import bw4t6.entities.Subscription;
+import bw4t6.entities.Ticket;
 import bw4t6.entities.abstracts.DocumentOfTravel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class DocumentOfTravelDAO {
@@ -62,8 +64,9 @@ public class DocumentOfTravelDAO {
                 Long.class);
         query.setParameter("startDate", startDate);
         query.setParameter("endDate", endDate);
-        long count = query.getSingleResult();
-        System.out.println("Totale biglietti validati tra " + startDate + " e " +endDate+ " : " + count);
+        Long count = query.getSingleResult();
+
+        System.out.println("Totale biglietti validati tra " + startDate + " e " +endDate+ " : " +  count);
 
     }
 
