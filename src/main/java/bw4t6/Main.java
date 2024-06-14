@@ -4,7 +4,7 @@ import bw4t6.functionality.MyScanner;
 
 public class Main {
     public static void main(String[] args) {
-        //  DbCreation.firstRun();
+        // DbCreation.firstRun();
 
         //  DbCreation.addElement();  //Prova di aggiunte su elementi già esistenti
 

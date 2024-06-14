@@ -233,12 +233,12 @@ public class MyScanner {
                     maintenanceDAO.maintenanceByVehicleId(vehicleID).forEach(System.out::println);
                     break;
                 case 6:
-                    System.out.println("Inserisci id corrispondente al veicolo: ");
-                    String vehicle = scanner.nextLine(); // aeba9b8e-fc5e-43fd-910c-a8f739f0593d
+                    System.out.println("Inserisci id corrispondente al veicolo per visualizzare i biglietti validati: ");
+                    String vehicle = scanner.nextLine(); // 1c150e5b-ab0d-4827-b7d2-2fe111399c65
                     docDAO.countValidatedTicketsByVehicle(UUID.fromString(vehicle));
                     break;
                 case 7:
-                    System.out.println("Inserisci id corrispondente al veicolo: ");
+                    System.out.println("Inserisci id corrispondente al veicolo per visualizzare i biglietti totali: ");
                     String vehicleAllTicket = scanner.nextLine(); // 1c150e5b-ab0d-4827-b7d2-2fe111399c65
                     docDAO.countTicketsByVehicle(UUID.fromString(vehicleAllTicket));
                     break;
@@ -247,8 +247,7 @@ public class MyScanner {
                     String dataVehicle1 = scanner.nextLine(); // 2024-06-08
                     LocalDate formatDateVehicle1 = LocalDate.parse(dataVehicle1, DateTimeFormatter.ISO_LOCAL_DATE);
                     LocalDateTime dateTimeVehicle1 = formatDateVehicle1.atStartOfDay();
-
-
+                    
                     System.out.print("al giorno: ");
                     String dataVehicle2 = scanner.nextLine(); // 2024-06-20
                     LocalDate formatDateVehicle2 = LocalDate.parse(dataVehicle2, DateTimeFormatter.ISO_LOCAL_DATE);
