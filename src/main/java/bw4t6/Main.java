@@ -231,6 +231,8 @@ public class Main {
         System.out.println("***********************findSoldTicketByTime*************************");
         shopDAO.findSoldByTime(LocalDateTime.now().minusDays(5), LocalDateTime.now().plusDays(1), "Milano").forEach(System.out::println);
 
+        System.out.println("***********************findSubByTime*************************");
+        shopDAO.findSubByTime(LocalDateTime.now().minusDays(5), LocalDateTime.now().plusDays(1), "Milano").forEach(System.out::println);
 
         System.out.println("***********************countValidatedTicketsByTime*************************");
         docDAO.countValidatedTicketsByTime(LocalDateTime.now().minusDays(30), LocalDateTime.now().plusDays(1));

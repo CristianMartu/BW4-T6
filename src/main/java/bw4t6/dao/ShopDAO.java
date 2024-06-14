@@ -1,7 +1,8 @@
 package bw4t6.dao;
 
 import bw4t6.entities.AutomaticSeller;
-import bw4t6.entities.abstracts.DocumentOfTravel;
+import bw4t6.entities.Subscription;
+import bw4t6.entities.Ticket;
 import bw4t6.entities.abstracts.Shop;
 import bw4t6.enums.AutomaticSellerState;
 import jakarta.persistence.EntityManager;
@@ -56,19 +57,29 @@ public class ShopDAO {
         return query.getResultList();
     }
 
-    public List<DocumentOfTravel> findSoldByTime(LocalDateTime date1, LocalDateTime date2, String name) {
+//    public List<DocumentOfTravel> findSoldByTime(LocalDateTime date1, LocalDateTime date2, String name) {
+//        List<Shop> result = findSoldByShop(name);
+//        UUID sellerId = result.get(0).getSeller_id();
+//        TypedQuery<DocumentOfTravel> query = em.createQuery("SELECT d FROM Ticket d WHERE d.emission_date BETWEEN :date1 AND :date2", DocumentOfTravel.class);
+//        query.setParameter("date1", date1);
+//        query.setParameter("date2", date2);
+//        return query.getResultList().stream().filter(document -> document.getShop().getSeller_id() == sellerId).toList();
+//    }
+
+    public List<Ticket> findSoldByTime(LocalDateTime date1, LocalDateTime date2, String name) {
         List<Shop> result = findSoldByShop(name);
         UUID sellerId = result.get(0).getSeller_id();
-        TypedQuery<DocumentOfTravel> query = em.createQuery("SELECT d FROM DocumentOfTravel d WHERE d.emission_date BETWEEN :date1 AND :date2", DocumentOfTravel.class);
+        TypedQuery<Ticket> query = em.createQuery("SELECT d FROM Ticket d WHERE d.emission_date BETWEEN :date1 AND :date2", Ticket.class);
         query.setParameter("date1", date1);
         query.setParameter("date2", date2);
         return query.getResultList().stream().filter(document -> document.getShop().getSeller_id() == sellerId).toList();
     }
 
-    public List<DocumentOfTravel> findSubByTime(LocalDateTime date1, LocalDateTime date2, String name) {
+
+    public List<Subscription> findSubByTime(LocalDateTime date1, LocalDateTime date2, String name) {
         List<Shop> result = findSoldByShop(name);
         UUID sellerId = result.get(0).getSeller_id();
-        TypedQuery<DocumentOfTravel> query = em.createQuery("SELECT d FROM DocumentOfTravel d WHERE d.emission_date BETWEEN :date1 AND :date2", DocumentOfTravel.class);
+        TypedQuery<Subscription> query = em.createQuery("SELECT d FROM Subscription d WHERE d.emission_date BETWEEN :date1 AND :date2", Subscription.class);
         query.setParameter("date1", date1);
         query.setParameter("date2", date2);
         return query.getResultList().stream().filter(document -> document.getShop().getSeller_id() == sellerId).toList();
