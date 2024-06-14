@@ -35,9 +35,13 @@ public class MyScanner {
             switch (choice) {
                 case 1:
                     userMenu(scanner);
+                    System.out.print("\n\n1. Utente\n2. Admin\n0. Esci\nScelta:");
+                    choice = scanner.nextInt();
                     break;
                 case 2:
                     adminMenu(scanner);
+                    System.out.print("\n\n1. Utente\n2. Admin\n0. Esci\nScelta:");
+                    choice = scanner.nextInt();
                     break;
                 case 0:
                     exit = true;
