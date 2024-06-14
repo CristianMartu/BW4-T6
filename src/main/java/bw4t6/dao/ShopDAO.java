@@ -29,7 +29,6 @@ public class ShopDAO {
     }
 
     public Shop findById(String id) {
-
         Shop shop = em.find(Shop.class, UUID.fromString(id));
         if (shop == null) throw new RuntimeException("Shop with id: " + id + " not found");
         return shop;
@@ -43,6 +42,17 @@ public class ShopDAO {
         em.remove(shop);
         tx.commit();
 
+    }
+
+    public Shop findByName(String name) {
+        TypedQuery<Shop> query = em.createQuery("SELECT s FROM Shop s WHERE s.emission_point ILIKE :name", Shop.class);
+        query.setParameter("name", name);
+        return query.getSingleResult();
+    }
+
+    public List<Shop> getAllShop() {
+        TypedQuery<Shop> query = em.createQuery("SELECT s FROM Shop s", Shop.class);
+        return query.getResultList();
     }
 
     public List<AutomaticSeller> findActiveAutomaticSeller() {

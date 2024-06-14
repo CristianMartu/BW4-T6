@@ -156,6 +156,12 @@ public class DbCreation {
 
         System.out.println("***********************countValidatedTicketsByVehicle*************************");
         docDAO.countValidatedTicketsByVehicle(UUID.fromString("1c150e5b-ab0d-4827-b7d2-2fe111399c65"));
+
+        System.out.println("***********************countTicketsByVehicle*************************");
+        docDAO.countTicketsByVehicle(UUID.fromString("1c150e5b-ab0d-4827-b7d2-2fe111399c65"));
+
+        System.out.println("***********************countTicketsByTimeANDVehicle*************************");
+        docDAO.countTicketsByTimeANDVehicle(LocalDateTime.now().minusDays(5), LocalDateTime.now().plusDays(1), UUID.fromString("1c150e5b-ab0d-4827-b7d2-2fe111399c65"));
     }
 
     public static void addElement() {

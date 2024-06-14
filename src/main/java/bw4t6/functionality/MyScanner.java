@@ -10,7 +10,9 @@ import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class MyScanner {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("team_database");
@@ -87,6 +89,13 @@ public class MyScanner {
                     cardDAO.save(card);
                     break;
                 case 2:
+                    System.out.println("Venditori disponibili: ");
+                    shopDAO.getAllShop().forEach(shop -> System.out.println(shop.getEmission_point()));
+
+                    System.out.print("\nScegli nome punto di emissione: ");
+                    String nameEmissionPoint2 = scanner.nextLine();
+                    Shop shop2 = shopDAO.findByName(nameEmissionPoint2);
+
                     System.out.println("Scegli durata abbonamento: \n1 - Settimanale\n2 - Mensile");
                     int number = Integer.parseInt(scanner.nextLine());
                     SubscriptionState state;
@@ -105,14 +114,20 @@ public class MyScanner {
                     System.out.println("Scrivi ID tessera utente");
                     String card_id = scanner.nextLine();   // 37d98088-3f68-47ec-81e1-0beeea7a3bcb
                     Card giovanni = cardDAO.findById(card_id);
-                    Shop roma = shopDAO.findById("6ff3e06f-4a78-45f1-b69d-43bb59adf6e9");
-                    Subscription subscription = new Subscription(LocalDateTime.now(), price, roma, state, giovanni);
+                    Subscription subscription = new Subscription(LocalDateTime.now(), price, shop2, state, giovanni);
                     docDAO.save(subscription);
                     break;
                 case 3:
+                    System.out.println("Venditori disponibili: ");
+                    shopDAO.getAllShop().forEach(shop -> System.out.println(shop.getEmission_point()));
+
+                    System.out.print("\nScegli nome punto di emissione: ");
+                    String nameEmissionPoint = scanner.nextLine();
+                    Shop shop = shopDAO.findByName(nameEmissionPoint);
+
                     System.out.println("Scegli come comprare ticket: \n1. Abbonamento\n2. Non hai abbonamento ");
                     int number2 = Integer.parseInt(scanner.nextLine());
-                    Shop roma2 = shopDAO.findById("6ff3e06f-4a78-45f1-b69d-43bb59adf6e9");
+//                    Shop roma2 = shopDAO.findById("6ff3e06f-4a78-45f1-b69d-43bb59adf6e9");
                     Vehicle trattaRomaBologa = vehicleDAO.findById("aeba9b8e-fc5e-43fd-910c-a8f739f0593d");
 
                     if (number2 == 1) {
@@ -122,13 +137,13 @@ public class MyScanner {
                         String subscriptionId = scanner.nextLine();  // cdfe79cd-abff-446f-a77c-496397e5c7a1
                         Subscription subscriptionGiacomo = docDAO.findSubscriptionById(subscriptionId);
 
-                        Ticket ticketBySub = new Ticket(LocalDateTime.now(), roma2, trattaRomaBologa, subscriptionGiacomo, 400);
+                        Ticket ticketBySub = new Ticket(LocalDateTime.now(), shop, trattaRomaBologa, subscriptionGiacomo, 400);
                         docDAO.save(ticketBySub);
 
                     } else if (number2 == 2) {
                         System.out.println("Hai selezionato: Compra un ticket senza abbonamento");
                         User userGiovanni = userDAO.findById("37d98088-3f68-47ec-81e1-0beeea7a3bcb");
-                        Ticket ticket = new Ticket(LocalDateTime.now(), 2.50, roma2, userGiovanni, trattaRomaBologa, 400);
+                        Ticket ticket = new Ticket(LocalDateTime.now(), 2.50, shop, userGiovanni, trattaRomaBologa, 400);
                         docDAO.save(ticket);
                     }
 
@@ -152,16 +167,16 @@ public class MyScanner {
         boolean exit = false;
         while (!exit) {
             System.out.println("\nMenu Admin:");
-            System.out.println("1. Lista manutenzioni veicolo");
-            System.out.println("2.");
-            System.out.println("3.");
-            System.out.println("4.");
-            System.out.println("5.");
-            System.out.println("6.");
-            System.out.println("7. ");
-            System.out.println("8.");
-            System.out.println("9.");
-            System.out.println("10.");
+            System.out.println("1. Visualizza biglietti venduti per punto di emissione e data");
+            System.out.println("2. Visualizza abbonamenti venduti per punto di emissione e data");
+            System.out.println("3. Visualizza validità tessera utente tramite id utente");
+            System.out.println("4. Visualizza tutti veicoli");
+            System.out.println("5. Visualizza manutenzione per id veicolo");
+            System.out.println("6. Visualizza numero biglietti totali timbrati su un mezzo");
+            System.out.println("7. Visualizza numero biglietti totali per una specifica tratta");
+            System.out.println("8. Visualizza numero biglietti totali in un determinato periodo di tempo per id mezzo");
+            System.out.println("9. Visualizza distributori automatici attivi");
+            System.out.println("10. Visualizza veicoli in servizio");
             System.out.println("0. Esci");
 
             System.out.print("Scelta: ");
@@ -169,45 +184,88 @@ public class MyScanner {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Inserisci id corrispondente al veicolo: ");
-                    String vehicleID = scanner.nextLine();
-                    maintenanceDAO.maintenanceByVehicleId(vehicleID).forEach(System.out::println);
+                    System.out.print("\nInserisci periodo di tempo \ndal giorno: ");
+                    String data1 = scanner.nextLine(); // 2024-06-08
+                    LocalDate formatDate1 = LocalDate.parse(data1, DateTimeFormatter.ISO_LOCAL_DATE);
+                    LocalDateTime dateTime1 = formatDate1.atStartOfDay();
+
+
+                    System.out.print("al giorno: ");
+                    String data2 = scanner.nextLine(); // 2024-06-20
+                    LocalDate formatDate2 = LocalDate.parse(data2, DateTimeFormatter.ISO_LOCAL_DATE);
+                    LocalDateTime dateTime2 = formatDate2.atStartOfDay();
+
+                    shopDAO.getAllShop().forEach(shop -> System.out.println(shop.getEmission_point()));
+
+                    System.out.print("\nScegli nome punto di emissione: ");
+                    String emissionPoint = scanner.nextLine();
+                    shopDAO.findSoldByTime(dateTime1, dateTime2, emissionPoint).forEach(System.out::println);
                     break;
                 case 2:
-                    System.out.println("Hai selezionato: Opzione 2");
+                    System.out.print("\nInserisci periodo di tempo\ndal giorno: ");
+                    String dataSub1 = scanner.nextLine(); // 2024-06-08
+                    LocalDate formatDateSub1 = LocalDate.parse(dataSub1, DateTimeFormatter.ISO_LOCAL_DATE);
+                    LocalDateTime dateTimeSub1 = formatDateSub1.atStartOfDay();
 
+
+                    System.out.print("al giorno: ");
+                    String dataSub2 = scanner.nextLine(); // 2024-06-20
+                    LocalDate formatDateSub2 = LocalDate.parse(dataSub2, DateTimeFormatter.ISO_LOCAL_DATE);
+                    LocalDateTime dateTimeSub2 = formatDateSub2.atStartOfDay();
+
+                    shopDAO.getAllShop().forEach(shop -> System.out.println(shop.getEmission_point()));
+
+                    System.out.print("\nScegli nome punto di emissione: ");
+                    String emissionPointForSub = scanner.nextLine();
+                    shopDAO.findSubByTime(dateTimeSub1, dateTimeSub2, emissionPointForSub).forEach(System.out::println);
                     break;
                 case 3:
-                    System.out.println("Hai selezionato: Opzione 3");
-
+                    System.out.println("Inserire id utente: ");
+                    String subscriptionId = scanner.nextLine(); // 10c5a836-9c63-4738-8592-f2252cdfc9a8
+                    docDAO.validitySubscription(subscriptionId);
                     break;
                 case 4:
-                    System.out.println("Hai selezionato: Opzione 4");
-
+                    vehicleDAO.getVehicle().forEach(System.out::println);
                     break;
                 case 5:
-                    System.out.println("Hai selezionato: Opzione 5");
-
+                    System.out.println("Inserisci id corrispondente al veicolo: ");
+                    String vehicleID = scanner.nextLine(); // 1c150e5b-ab0d-4827-b7d2-2fe111399c65
+                    maintenanceDAO.maintenanceByVehicleId(vehicleID).forEach(System.out::println);
                     break;
                 case 6:
-                    System.out.println("Hai selezionato: Opzione 6");
-
+                    System.out.println("Inserisci id corrispondente al veicolo: ");
+                    String vehicle = scanner.nextLine(); // aeba9b8e-fc5e-43fd-910c-a8f739f0593d
+                    docDAO.countValidatedTicketsByVehicle(UUID.fromString(vehicle));
                     break;
                 case 7:
-                    System.out.println("Hai selezionato: Opzione 7");
-
+                    System.out.println("Inserisci id corrispondente al veicolo: ");
+                    String vehicleAllTicket = scanner.nextLine(); // 1c150e5b-ab0d-4827-b7d2-2fe111399c65
+                    docDAO.countTicketsByVehicle(UUID.fromString(vehicleAllTicket));
                     break;
                 case 8:
-                    System.out.println("Hai selezionato: Opzione 8");
+                    System.out.print("\nInserisci periodo di tempo \ndal giorno: ");
+                    String dataVehicle1 = scanner.nextLine(); // 2024-06-08
+                    LocalDate formatDateVehicle1 = LocalDate.parse(dataVehicle1, DateTimeFormatter.ISO_LOCAL_DATE);
+                    LocalDateTime dateTimeVehicle1 = formatDateVehicle1.atStartOfDay();
 
+
+                    System.out.print("al giorno: ");
+                    String dataVehicle2 = scanner.nextLine(); // 2024-06-20
+                    LocalDate formatDateVehicle2 = LocalDate.parse(dataVehicle2, DateTimeFormatter.ISO_LOCAL_DATE);
+                    LocalDateTime dateTimeVehicle2 = formatDateVehicle2.atStartOfDay();
+
+                    System.out.println("Inserisci id corrispondente al veicolo: ");
+                    String vehicleTicket = scanner.nextLine(); // 1c150e5b-ab0d-4827-b7d2-2fe111399c65
+
+                    docDAO.countTicketsByTimeANDVehicle(dateTimeVehicle1, dateTimeVehicle2, UUID.fromString(vehicleTicket));
                     break;
                 case 9:
-                    System.out.println("Hai selezionato: Opzione 9");
-
+                    System.out.println("Distributori automatici in servizio: ");
+                    shopDAO.findActiveAutomaticSeller().forEach(automaticSeller -> System.out.println(automaticSeller.getEmission_point()));
                     break;
                 case 10:
-                    System.out.println("Hai selezionato: Opzione 10");
-
+                    System.out.println("Veicoli in servizio: ");
+                    vehicleDAO.serviceByVehicleId().forEach(System.out::println);
                     break;
                 case 0:
                     exit = true;

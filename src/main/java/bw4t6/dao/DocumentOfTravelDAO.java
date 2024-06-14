@@ -76,5 +76,25 @@ public class DocumentOfTravelDAO {
         long count = query.getSingleResult();
         System.out.println("Totale biglietti validati nel veicolo " + vehicle_id + " : " + count);
     }
+
+    public void countTicketsByVehicle(UUID vehicle_id) {
+        TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(t) FROM Ticket t WHERE t.vehicle_ticket.vehicle_id = :vehicle_id",
+                Long.class);
+        query.setParameter("vehicle_id", vehicle_id);
+        long count = query.getSingleResult();
+        System.out.println("Totale biglietti di " + vehicle_id + " : " + count);
+    }
+
+    public void countTicketsByTimeANDVehicle(LocalDateTime startDate, LocalDateTime endDate, UUID vehicle_id) {
+        TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(t) FROM Ticket t WHERE t.vehicle_ticket.vehicle_id = :vehicle_id AND t.emission_date BETWEEN :startDate AND :endDate",
+                Long.class);
+        query.setParameter("vehicle_id", vehicle_id);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+        long count = query.getSingleResult();
+        System.out.println("Totale biglietti di " + vehicle_id + " : " + count);
+    }
 }
 

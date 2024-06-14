@@ -1,8 +1,6 @@
 package bw4t6.dao;
 
-import bw4t6.entities.AutomaticSeller;
 import bw4t6.entities.Vehicle;
-import bw4t6.enums.AutomaticSellerState;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
@@ -39,8 +37,14 @@ public class VehicleDAO {
         tx.commit();
 
     }
+
     public List<Vehicle> serviceByVehicleId() {
         TypedQuery<Vehicle> query = em.createQuery("SELECT v FROM Vehicle v WHERE v.state = TRUE", Vehicle.class);
+        return query.getResultList();
+    }
+
+    public List<Vehicle> getVehicle() {
+        TypedQuery<Vehicle> query = em.createQuery("SELECT v FROM Vehicle v", Vehicle.class);
         return query.getResultList();
     }
 }
