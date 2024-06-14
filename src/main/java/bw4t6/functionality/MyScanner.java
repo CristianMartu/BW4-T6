@@ -27,19 +27,26 @@ public class MyScanner {
         System.out.println("Benvenuto! Sei un utente o un admin?");
         System.out.println("1. Utente");
         System.out.println("2. Admin");
+        System.out.println("0. Esci");
         System.out.print("Scelta: ");
         int choice = scanner.nextInt();
-
-        switch (choice) {
-            case 1:
-                userMenu(scanner);
-                break;
-            case 2:
-                adminMenu(scanner);
-                break;
-            default:
-                System.out.println("Scelta non valida.");
-                break;
+        boolean exit = false;
+        while (!exit) {
+            switch (choice) {
+                case 1:
+                    userMenu(scanner);
+                    break;
+                case 2:
+                    adminMenu(scanner);
+                    break;
+                case 0:
+                    exit = true;
+                    break;
+                default:
+                    System.out.print("\nScelta non valida.\n\nScelta: ");
+                    choice = scanner.nextInt();
+                    break;
+            }
         }
         scanner.close();
     }
@@ -47,7 +54,7 @@ public class MyScanner {
     private static void userMenu(Scanner scanner) {
         boolean exit = false;
         while (!exit) {
-            System.out.println("Menu Utente:");
+            System.out.println("\nMenu Utente:");
             System.out.println("1. Compra una card");
             System.out.println("2. Acquista un abbonamento");
             System.out.println("3. Compra un ticket");
@@ -83,7 +90,7 @@ public class MyScanner {
     private static void adminMenu(Scanner scanner) {
         boolean exit = false;
         while (!exit) {
-            System.out.println("Menu Admin:");
+            System.out.println("\nMenu Admin:");
             System.out.println("1.");
             System.out.println("2.");
             System.out.println("3.");
