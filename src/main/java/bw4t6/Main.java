@@ -8,7 +8,7 @@ public class Main {
 
         //  DbCreation.addElement();  //Prova di aggiunte su elementi già esistenti
 
-        //DbCreation.queryPrint();
+        //  DbCreation.queryPrint();
 
         MyScanner.startScanner();
     }

@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.util.Scanner;
+
 public class MyScanner {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("team_database");
 
@@ -19,6 +21,133 @@ public class MyScanner {
         TripDAO tripDAO = new TripDAO(em);
         UserDAO userDAO = new UserDAO(em);
         VehicleDAO vehicleDAO = new VehicleDAO(em);
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Benvenuto! Sei un utente o un admin?");
+        System.out.println("1. Utente");
+        System.out.println("2. Admin");
+        System.out.print("Scelta: ");
+        int choice = scanner.nextInt();
+
+        switch (choice) {
+            case 1:
+                userMenu(scanner);
+                break;
+            case 2:
+                adminMenu(scanner);
+                break;
+            default:
+                System.out.println("Scelta non valida.");
+                break;
+        }
+        scanner.close();
+    }
+
+    private static void userMenu(Scanner scanner) {
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("Menu Utente:");
+            System.out.println("1. Compra una card");
+            System.out.println("2. Acquista un abbonamento");
+            System.out.println("3. Compra un ticket");
+            System.out.println("4. Controlla la validità dell'abbonamento");
+            System.out.println("0. Esci");
+
+            System.out.print("Scelta: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Hai selezionato: Compra una card");
+
+                case 2:
+                    System.out.println("Hai selezionato: Acquista un abbonamento");
+
+                case 3:
+                    System.out.println("Hai selezionato: Compra un ticket");
+                    break;
+                case 4:
+                    System.out.println("Hai selezionato: Controlla la validità dell'abbonamento");
+                    break;
+                case 0:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Scelta non valida. Riprova.");
+                    break;
+            }
+        }
+    }
+
+    private static void adminMenu(Scanner scanner) {
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("Menu Admin:");
+            System.out.println("1.");
+            System.out.println("2.");
+            System.out.println("3.");
+            System.out.println("4.");
+            System.out.println("5.");
+            System.out.println("6.");
+            System.out.println("7. ");
+            System.out.println("8.");
+            System.out.println("9.");
+            System.out.println("10.");
+            System.out.println("0. Esci");
+
+            System.out.print("Scelta: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Hai selezionato: Opzione 1");
+
+                    break;
+                case 2:
+                    System.out.println("Hai selezionato: Opzione 2");
+
+                    break;
+                case 3:
+                    System.out.println("Hai selezionato: Opzione 3");
+
+                    break;
+                case 4:
+                    System.out.println("Hai selezionato: Opzione 4");
+
+                    break;
+                case 5:
+                    System.out.println("Hai selezionato: Opzione 5");
+
+                    break;
+                case 6:
+                    System.out.println("Hai selezionato: Opzione 6");
+
+                    break;
+                case 7:
+                    System.out.println("Hai selezionato: Opzione 7");
+
+                    break;
+                case 8:
+                    System.out.println("Hai selezionato: Opzione 8");
+
+                    break;
+                case 9:
+                    System.out.println("Hai selezionato: Opzione 9");
+
+                    break;
+                case 10:
+                    System.out.println("Hai selezionato: Opzione 10");
+
+                    break;
+                case 0:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Scelta non valida. Riprova.");
+                    break;
+            }
+        }
 
     }
 }
