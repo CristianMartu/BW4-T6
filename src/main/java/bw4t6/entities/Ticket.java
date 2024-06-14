@@ -115,7 +115,7 @@ public class Ticket extends DocumentOfTravel {
     @Override
     public String toString() {
         return "Ticket{" +
-                ", state=" + state +
+                "state=" + state +
 //                ", user=" + user +
                 ", vehicle_ticket=" + vehicle_ticket +
                 ", document_id=" + document_id +
