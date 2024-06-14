@@ -1,13 +1,15 @@
 package bw4t6.functionality;
 
 import bw4t6.dao.*;
-import bw4t6.entities.Card;
-import bw4t6.entities.User;
+import bw4t6.entities.*;
+import bw4t6.entities.abstracts.Shop;
+import bw4t6.enums.SubscriptionState;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class MyScanner {
@@ -22,7 +24,6 @@ public class MyScanner {
     private static final TripDAO tripDAO = new TripDAO(em);
     private static final UserDAO userDAO = new UserDAO(em);
     private static final VehicleDAO vehicleDAO = new VehicleDAO(em);
-
 
     public static void startScanner() {
         Scanner scanner = new Scanner(System.in);
@@ -86,13 +87,56 @@ public class MyScanner {
                     cardDAO.save(card);
                     break;
                 case 2:
-                    System.out.println("Hai selezionato: Acquista un abbonamento");
+                    System.out.println("Scegli durata abbonamento: \n1 - Settimanale\n2 - Mensile");
+                    int number = Integer.parseInt(scanner.nextLine());
+                    SubscriptionState state;
+                    if (number == 1) {
+                        state = SubscriptionState.WEEKLY;
+                    } else if (number == 2) {
+                        state = SubscriptionState.MONTHLY;
+                    } else {
+                        System.out.println("Hai sbagliato\nInserito default 1");
+                        state = SubscriptionState.WEEKLY;
+                    }
+                    double price;
+                    if (state == SubscriptionState.WEEKLY) {
+                        price = 50;
+                    } else price = 150;
+                    System.out.println("Scrivi ID tessera utente");
+                    String card_id = scanner.nextLine();   // 37d98088-3f68-47ec-81e1-0beeea7a3bcb
+                    Card giovanni = cardDAO.findById(card_id);
+                    Shop roma = shopDAO.findById("6ff3e06f-4a78-45f1-b69d-43bb59adf6e9");
+                    Subscription subscription = new Subscription(LocalDateTime.now(), price, roma, state, giovanni);
+                    docDAO.save(subscription);
                     break;
                 case 3:
-                    System.out.println("Hai selezionato: Compra un ticket");
+                    System.out.println("Scegli come comprare ticket: \n1. Abbonamento\n2. Non hai abbonamento ");
+                    int number2 = Integer.parseInt(scanner.nextLine());
+                    Shop roma2 = shopDAO.findById("6ff3e06f-4a78-45f1-b69d-43bb59adf6e9");
+                    Vehicle trattaRomaBologa = vehicleDAO.findById("aeba9b8e-fc5e-43fd-910c-a8f739f0593d");
+
+                    if (number2 == 1) {
+                        System.out.println("Hai selezionato: Compra un ticket con abbonamento");
+
+                        System.out.println("Inserisci id abbonamento: ");
+                        String subscriptionId = scanner.nextLine();  // cdfe79cd-abff-446f-a77c-496397e5c7a1
+                        Subscription subscriptionGiacomo = docDAO.findSubscriptionById(subscriptionId);
+
+                        Ticket ticketBySub = new Ticket(LocalDateTime.now(), roma2, trattaRomaBologa, subscriptionGiacomo, 400);
+                        docDAO.save(ticketBySub);
+
+                    } else if (number2 == 2) {
+                        System.out.println("Hai selezionato: Compra un ticket senza abbonamento");
+                        User userGiovanni = userDAO.findById("37d98088-3f68-47ec-81e1-0beeea7a3bcb");
+                        Ticket ticket = new Ticket(LocalDateTime.now(), 2.50, roma2, userGiovanni, trattaRomaBologa, 400);
+                        docDAO.save(ticket);
+                    }
+
                     break;
                 case 4:
-                    System.out.println("Hai selezionato: Controlla la validità dell'abbonamento");
+                    System.out.println("Hai selezionato: Controlla la validità dell'abbonamento\nInserisci id: ");
+                    String subscriptionId = scanner.nextLine(); //cdfe79cd-abff-446f-a77c-496397e5c7a1 Giovanni
+                    docDAO.validitySubscription(subscriptionId);
                     break;
                 case 0:
                     exit = true;

@@ -1,14 +1,12 @@
 package bw4t6.dao;
 
 import bw4t6.entities.Subscription;
-import bw4t6.entities.Ticket;
 import bw4t6.entities.abstracts.DocumentOfTravel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 public class DocumentOfTravelDAO {
@@ -51,9 +49,9 @@ public class DocumentOfTravelDAO {
         query.setParameter("id", UUID.fromString(id));
         query.getResultList().forEach(subscription -> {
             if (subscription.getExpired_date().isBefore(LocalDateTime.now())) {
-                System.out.println("tessera scaduta!");
+                System.out.println("La tessera con id: " + subscription.getDocument_id() + " tessera scaduta!");
             } else {
-                System.out.println("tessera valida");
+                System.out.println("La tessera con id: " + subscription.getDocument_id() + " tessera valida");
             }
         });
     }
@@ -66,7 +64,7 @@ public class DocumentOfTravelDAO {
         query.setParameter("endDate", endDate);
         Long count = query.getSingleResult();
 
-        System.out.println("Totale biglietti validati tra " + startDate + " e " +endDate+ " : " +  count);
+        System.out.println("Totale biglietti validati tra " + startDate + " e " + endDate + " : " + count);
 
     }
 
@@ -75,7 +73,7 @@ public class DocumentOfTravelDAO {
                 "SELECT COUNT(t) FROM Ticket t WHERE t.vehicle_ticket.vehicle_id = :vehicle_id AND t.state = false",
                 Long.class);
         query.setParameter("vehicle_id", vehicle_id);
-        long count =  query.getSingleResult();
+        long count = query.getSingleResult();
         System.out.println("Totale biglietti validati nel veicolo " + vehicle_id + " : " + count);
     }
 }
