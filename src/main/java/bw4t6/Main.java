@@ -231,9 +231,11 @@ public class Main {
         System.out.println("***********************findSoldTicketByTime*************************");
         shopDAO.findSoldByTime(LocalDateTime.now().minusDays(5), LocalDateTime.now().plusDays(1), "Milano").forEach(System.out::println);
 
-        //stampa tutti i biglietti tra le due date, aggiungere controllo di stato del biglietto
-        System.out.println("***********************findTicketSubByTime*************************");
-        shopDAO.findTicketByTime(LocalDateTime.now().minusDays(5), LocalDateTime.now().plusDays(1)).forEach(System.out::println);
 
+        System.out.println("***********************countValidatedTicketsByTime*************************");
+        docDAO.countValidatedTicketsByTime(LocalDateTime.now().minusDays(5), LocalDateTime.now().plusDays(1));
+
+        System.out.println("***********************countValidatedTicketsByVehicle*************************");
+        docDAO.countValidatedTicketsByVehicle(UUID.fromString("1c150e5b-ab0d-4827-b7d2-2fe111399c65"));
     }
 }

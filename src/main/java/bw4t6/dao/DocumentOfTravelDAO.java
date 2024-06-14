@@ -55,5 +55,25 @@ public class DocumentOfTravelDAO {
             }
         });
     }
+
+    public void countValidatedTicketsByTime(LocalDateTime startDate, LocalDateTime endDate) {
+        TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(t) FROM Ticket t WHERE t.emission_date BETWEEN :startDate AND :endDate AND t.state = false",
+                Long.class);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+        long count = query.getSingleResult();
+        System.out.println("Totale biglietti validati tra " + startDate + " e " +endDate+ " : " + count);
+
+    }
+
+    public void countValidatedTicketsByVehicle(UUID vehicle_id) {
+        TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(t) FROM Ticket t WHERE t.vehicle_ticket.vehicle_id = :vehicle_id AND t.state = false",
+                Long.class);
+        query.setParameter("vehicle_id", vehicle_id);
+        long count =  query.getSingleResult();
+        System.out.println("Totale biglietti validati nel veicolo " + vehicle_id + " : " + count);
+    }
 }
 

@@ -74,10 +74,4 @@ public class ShopDAO {
         return query.getResultList().stream().filter(document -> document.getShop().getSeller_id() == sellerId).toList();
     }
 
-    public List<DocumentOfTravel> findTicketByTime(LocalDateTime date1, LocalDateTime date2) {
-        TypedQuery<DocumentOfTravel> query = em.createQuery("SELECT d FROM DocumentOfTravel d WHERE d.emission_date BETWEEN :date1 AND :date2", DocumentOfTravel.class);
-        query.setParameter("date1", date1);
-        query.setParameter("date2", date2);
-        return query.getResultList();
-    }
 }
